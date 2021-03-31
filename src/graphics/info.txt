@@ -1,0 +1,15 @@
+class Render
+{
+public:
+    Render();
+
+    virtual void drawIndexed() = 0;
+};
+
+class OpenGLRenderer :: public Render
+{
+public:
+    OpenGLRenderer();
+
+    void drawIndexed() {}
+}
