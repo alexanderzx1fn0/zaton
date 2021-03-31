@@ -11,6 +11,7 @@ public:
 private:
     vec3 pos;
     vec3 rot;
+    OBJ * obj; // MESH data
 };
 
 #endif
