@@ -1,3 +1,5 @@
 winBuild/
 linuxBuild/
 *.swp
+*.txt
+!CMakeLists.txt
