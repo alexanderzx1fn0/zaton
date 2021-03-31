@@ -51,6 +51,8 @@ ${PLATFORM_SOURCES}
 "src/game/BasePlayer.h"
 "src/game/Player.h"
 "src/game/Player.cpp"
+"src/game/Entity.h"
+"src/game/Entity.cpp"
 
 "src/gui/UI.h"
 "src/gui/UI.cpp"
