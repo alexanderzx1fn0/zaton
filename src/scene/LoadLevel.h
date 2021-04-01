@@ -3,6 +3,7 @@
 
 #include "sci-fi_crate.h"
 #include "level2.h"
+#include "simpGun.h"
 
 bool ZatonLoadLevel(const char* file);
 void ZatonClearLevel();

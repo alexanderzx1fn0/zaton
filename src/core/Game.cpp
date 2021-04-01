@@ -36,6 +36,8 @@ Game::~Game()
     delete floorTex;
     delete wallTex;
     delete medKitTex;
+    delete gunTex;
+
     delete renderer;
 }
 
@@ -59,6 +61,8 @@ bool Game::initGame()
 			    CeilingIndices, CeilingIndicesCount, CeilingNormals, CeilingTexcoords);
     renderer->drawIndexed(medKitPositions, medKitVertices,
 			    medKitIndices, medKitIndicesCount, medKitNormals, medKitTexcoords);
+    renderer->drawIndexed(GunPositions, GunVertices,
+			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
     
@@ -67,6 +71,7 @@ bool Game::initGame()
     floorTex = new Texture("../data/textures/floor01.jpg");
     wallTex = new Texture("../data/textures/small_brick1.bmp");
     medKitTex = new Texture("../data/textures/barrelCol.png");
+    gunTex = new Texture("../data/textures/simpGun_diffuse.png");
 
 
     medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
@@ -99,6 +104,9 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
+
+    gunTex->bind(0);
+    renderer->batch[4]->draw_mesh();
 
 
 

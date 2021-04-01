@@ -27,6 +27,7 @@ public:
     class Texture* floorTex;
     class Texture* wallTex;
     class Texture* medKitTex;
+    class Texture* gunTex;
 
     class UI *ui;
 
