@@ -13,6 +13,7 @@ public:
     mat4 mView;
     mat4 mProj;
     mat4 mViewProj;
+    mat4 mViewDEBUG;
 
     float aspect;
     bool freeCam;

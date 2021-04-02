@@ -2,7 +2,7 @@
 #include "core/Platform.h"
 
 Camera::Camera()
-      : aspect(0.0f), mView(), mProj(), mViewProj(), pos(0.0f), rot(0.0f), freeCam(false)
+      : aspect(0.0f), mView(), mProj(), mViewProj(), pos(0.0f), rot(0.0f), freeCam(false), mViewDEBUG()
 {
 }
 
@@ -39,6 +39,8 @@ void Camera::update()
     mView.translate(-pos);
 
     mProj.perspective(90.0f, aspect, 0.01f, 100.0f);
+
+    mViewDEBUG = mView;
 
     mViewProj = mProj * mView;
 }

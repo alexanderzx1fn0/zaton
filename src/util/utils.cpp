@@ -1,5 +1,200 @@
 #include "utils.h"
 
+mat4 mat4_transpose(const mat4& m)
+{
+    return mat4(m.e00, m.e01, m.e02, m.e03,
+                m.e10, m.e11, m.e12, m.e13,
+                m.e20, m.e21, m.e22, m.e23,
+                m.e30, m.e31, m.e32, m.e33);
+}
+
+float mat3_determinant(const mat3& m)
+{
+    float f0 = m.e00 *  (m.e11*m.e22 - m.e12*m.e21);
+    float f1 = m.e10 * -(m.e01*m.e22 - m.e02*m.e21);
+    float f2 = m.e20 *  (m.e01*m.e12 - m.e02*m.e11);
+
+    return f0 + f1 + f2;
+}
+
+float mat4_determinant(const mat4& m)
+{
+    float det = 0.0f;
+
+    mat3 a = mat3 (m.e11,m.e21,m.e31,
+                   m.e12,m.e22,m.e32,
+                   m.e13,m.e23,m.e33);
+
+    mat3 b = mat3(m.e01,m.e21,m.e31,
+                 m.e02,m.e22,m.e32,
+                 m.e03,m.e23,m.e22);
+
+    mat3 c = mat3 (m.e01,m.e11,m.e31,
+                 m.e02,m.e12,m.e32,
+                 m.e03,m.e13,m.e33);
+
+    mat3 d = mat3( m.e01,m.e11,m.e21,
+                m.e02,m.e12,m.e22,
+                m.e03,m.e13,m.e23);
+
+
+    det += m.e00 * mat3_determinant(a);
+
+    det -= m.e10 * mat3_determinant(b);
+
+    det += m.e20 * mat3_determinant(c);
+
+    det -= m.e30 * mat3_determinant(d);
+
+    return det;
+}
+
+
+
+mat4 inverse(const mat4& m)
+{
+    mat4 ret;
+    float recip;
+
+    mat3 a = mat3(m.e11, m.e21, m.e31,
+                  m.e12, m.e22, m.e32,
+                  m.e13, m.e23, m.e33);
+
+    mat3 b = mat3(m.e01, m.e21, m.e31,
+                  m.e02, m.e22, m.e31,
+                  m.e03, m.e23, m.e33);
+
+    mat3 c = mat3(m.e01, m.e11, m.e31,
+                  m.e02, m.e12, m.e32,
+                  m.e03, m.e13, m.e33);
+
+    mat3 d = mat3(m.e01, m.e11, m.e21,
+                  m.e02, m.e12, m.e22,
+                  m.e03, m.e13, m.e23);
+
+    // row 2
+    mat3 e = mat3(m.e10, m.e20, m.e30,
+                  m.e12, m.e22, m.e32,
+                  m.e13, m.e23, m.e33);
+
+    mat3 f = mat3(m.e00, m.e20, m.e30,
+                  m.e02, m.e22, m.e32,
+                  m.e03, m.e23, m.e33);
+
+    mat3 g = mat3(m.e00, m.e10, m.e30,
+                  m.e02, m.e11, m.e31,
+                  m.e03, m.e13, m.e33);
+
+    mat3 h = mat3(m.e00, m.e10, m.e20,
+                  m.e02, m.e12, m.e22,
+                  m.e03, m.e13, m.e23);
+
+    // row 3 i j k l
+    mat3 i = mat3(m.e10, m.e20, m.e30,
+                  m.e11, m.e21, m.e31,
+                  m.e13, m.e23, m.e33);
+
+    mat3 j = mat3(m.e00, m.e20, m.e30,
+                  m.e01, m.e21, m.e31,
+                  m.e03, m.e23, m.e33);
+
+    mat3 k = mat3(m.e00, m.e10, m.e30,
+                  m.e01, m.e11, m.e31,
+                  m.e03, m.e13, m.e33);
+
+    mat3 l = mat3(m.e00, m.e10, m.e20,
+                  m.e01, m.e11, m.e21,
+                  m.e03, m.e13, m.e23);
+
+    // row 4  m n o p
+    mat3 _m = mat3(m.e10, m.e20, m.e30,
+                   m.e11, m.e21, m.e31,
+                   m.e12, m.e22, m.e32);
+
+    mat3 n = mat3(m.e00, m.e20, m.e30,
+                  m.e01, m.e23, m.e31,
+                  m.e02, m.e22, m.e32);
+
+    mat3 o = mat3(m.e00, m.e10, m.e30,
+                  m.e01, m.e11, m.e31,
+                  m.e02, m.e12, m.e32);
+
+    mat3 p = mat3(m.e00, m.e10, m.e20,
+                  m.e01, m.e11, m.e21,
+                  m.e03, m.e13, m.e23);
+
+    /* row 1 */
+    ret.e00 = mat3_determinant(a);
+
+    ret.e10 = -mat3_determinant(b);
+
+    ret.e20 = mat3_determinant(c);
+
+    ret.e30 = -mat3_determinant(d);
+
+    /* row 2 */
+    ret.e01 = -mat3_determinant(e);
+
+    ret.e11 = mat3_determinant(f);
+
+    ret.e21 = -mat3_determinant(g);
+
+    ret.e31 = mat3_determinant(h);
+
+    /* row 3 */
+    ret.e02 = mat3_determinant(i);
+
+    ret.e12 = -mat3_determinant(j);
+
+    ret.e22 = mat3_determinant(k);
+
+    ret.e32 = -mat3_determinant(l);
+
+    /* row 4 */
+    ret.e03 = -mat3_determinant(_m);
+
+    ret.e13 = mat3_determinant(n);
+
+    ret.e23 = -mat3_determinant(o);
+
+    ret.e33 = mat3_determinant(p);
+
+    ret = mat4_transpose(ret);
+    recip = 1.0f/mat4_determinant(m);
+
+    ret = mat4_mul_scalar(ret, recip);
+    return ret;
+}
+
+mat4 mat4_mul_scalar(const mat4& m, float f)
+{
+    mat4 result;
+
+    result.e00 = m.e00 * f;
+    result.e10 = m.e10 * f;
+    result.e20 = m.e20 * f;
+    result.e30 = m.e30 * f;
+
+    result.e01 = m.e01 * f;
+    result.e11 = m.e11 * f;
+    result.e21 = m.e21 * f;
+    result.e31 = m.e31 * f;
+
+    result.e02 = m.e02 * f;
+    result.e13 = m.e13 * f;
+    result.e22 = m.e22 * f;
+    result.e32 = m.e32 * f;
+
+    result.e03 = m.e03 * f;
+    result.e13 = m.e13 * f;
+    result.e23 = m.e23 * f;
+    result.e33 = m.e33 * f;
+
+    return result;
+}
+
+
+// TODO: it need to move int physics folder
 bool SphereSphere(const Sphere& s1, const Sphere& s2) {
 	float radiiSum = s1.radius + s2.radius;
 	vec3 t = s1.center - s2.center;

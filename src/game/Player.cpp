@@ -110,16 +110,16 @@ void Player::update() {
 
 	if (SphereSphere(Sphere(pos, .5f), Sphere(medKitPos, 1.f)))
 	{
-	    printf("Collide with medKit\n");
+	    //printf("Collide with medKit\n");
 	    visible = false;
 	}
 	else
 	{
-	    printf("FAILED\n");
+	    //printf("FAILED\n");
 	}
 
-	printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
-	printf("MedKitPos of the player: %f %f %f\n", medKitPos.x, medKitPos.y, medKitPos.z);
+	//printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
+	//printf("MedKitPos of the player: %f %f %f\n", medKitPos.x, medKitPos.y, medKitPos.z);
 }
 
 void Player::collide() {

@@ -22,6 +22,7 @@
 
 vec3 medKitPos;
 bool visible = true;
+mat4 gunModel;
 
 Game::Game(int width, int height) : mWidth(width), mHeight(height)
 {}
@@ -75,6 +76,13 @@ bool Game::initGame()
 
 
     medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
+
+    //gunModel = glm::rotate(camPosition, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
+
+
+
+
+
     
     return true;
 }
@@ -104,7 +112,11 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
-
+    gunModel = camera->mView;
+    gunModel.translate(vec3(0, -0, 0.47f));
+    gunModel.scale(vec3(-.094));
+   // gunModel = inverse(camera->mView);
+    renderer->setModelMatrix(&gunModel);
     gunTex->bind(0);
     renderer->batch[4]->draw_mesh();
 
