@@ -195,9 +195,12 @@ int main()
         GLX_RENDER_TYPE, GLX_RGBA_BIT,
         GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
         GLX_DOUBLEBUFFER, true,
-        GLX_RED_SIZE, 1,
-        GLX_GREEN_SIZE, 1,
-        GLX_BLUE_SIZE, 1,
+        GLX_RED_SIZE, 8,
+        GLX_GREEN_SIZE, 8,
+        GLX_BLUE_SIZE, 8,
+	GLX_ALPHA_SIZE, 8,
+	GLX_DEPTH_SIZE, 24,
+	GLX_STENCIL_SIZE, 8,
         None
     };
 

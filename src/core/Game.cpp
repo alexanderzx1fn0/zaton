@@ -120,7 +120,7 @@ void Game::render() {
     invModelview.rotateX(player->rot.x);
     invModelview.rotateZ(player->rot.z);
 
-    mat4 e = invModelview * camera->mView;
+    //mat4 e = invModelview * camera->mView;
     /*
     printf("%f %f %f %f\n %f %f %f %f\n %f %f %f %f\n %f %f %f %f\n",
 	    e.e00,e.e10, e.e20,e.e30,
@@ -130,21 +130,14 @@ void Game::render() {
     */
 
     mat4 tr;
-    tr.scale(.4f);
-    tr.translate(vec3(3.0f, -2.0f, -4.0f));
-    //tr.scale(.4f);
-    //tr.rotateX(DEG2RAD*(-15.0f));
-    //tr.rotateY(DEG2RAD*(10.0f));
+    tr.scale(.05f);
+    tr.rotateY(DEG2RAD*(10.0f));
+    tr.translate(vec3(3.0f, -2.0f, -2.0f));
 
 
 
     mat4 gunMV = invModelview * tr;
-    //drawGun(renderer, mvp * gunMV, modelview, gunMV, camPos);
-    //gunModel = camera->mView;
-    //gunModel.scale(vec3(-.094));
-    //gunModel = inverse(camera->mView);
     renderer->setModelMatrix(&gunMV);
-    //renderer->setViewProjMatrix(&camera->mProj);
     gunTex->bind(0);
     renderer->batch[4]->draw_mesh();
 
