@@ -21,6 +21,7 @@ public:
     vec3 mousePos;
     vec3 mouseDelta;
     bool keyStates[Keyboard::KeyCount];
+    bool mouseStates[NUM_MOUSE_BUTTONS];
 
     void getMousePos()
     {

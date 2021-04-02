@@ -89,6 +89,8 @@ bool onMouseButton(const int x, const int y, const MouseButton button, const boo
 	    captureMouse(true);
 	    return true;
 	}
+
+
     }
     return false;
 }
@@ -131,10 +133,25 @@ int os_window_process() {
 	    // mouse button events
 	    case ButtonPress:
 		onMouseButton(e.xbutton.x, e.xbutton.y, (MouseButton) (e.xbutton.button - 1), true);
+		if ((e.xbutton.button -1 ) == MOUSE_RIGHT){
+		    GInput->mouseStates[MOUSE_RIGHT] = true;
+		}
+
+		if ((e.xbutton.button -1 ) == MOUSE_LEFT){
+		    GInput->mouseStates[MOUSE_LEFT] = true;
+		}
 		break;
 	    case ButtonRelease:
 	    {
 		onMouseButton(e.xbutton.x, e.xbutton.y, (MouseButton) (e.xbutton.button - 1), false);
+		if ((e.xbutton.button -1 ) == MOUSE_RIGHT){
+		    GInput->mouseStates[MOUSE_RIGHT] = false;
+		}
+
+		if ((e.xbutton.button -1 ) == MOUSE_LEFT){
+		    GInput->mouseStates[MOUSE_LEFT] = false;
+		}
+
 		break;
 	    }
 

@@ -25,6 +25,7 @@ Input::Input()
      mouseSensibility(.003f)
 {
     memset(keyStates, 0, sizeof(keyStates));
+    memset(mouseStates, 0, sizeof(mouseStates));
 }
 
 Input::~Input()

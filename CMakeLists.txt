@@ -23,6 +23,8 @@ ${PLATFORM_SOURCES}
 "src/core/Game.h"
 "src/core/Game.cpp"
 "src/core/Platform.h"
+"src/core/Timer.h"
+"src/core/Timer.cpp"
 
 "src/graphics/opengl/OpenGLExtensions.h"
 "src/graphics/opengl/OpenGLExtensions.cpp"
