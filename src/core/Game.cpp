@@ -130,6 +130,7 @@ void Game::render() {
     */
 
     mat4 tr;
+    tr.scale(.4f);
     tr.translate(vec3(3.0f, -2.0f, -4.0f));
     //tr.scale(.4f);
     //tr.rotateX(DEG2RAD*(-15.0f));
