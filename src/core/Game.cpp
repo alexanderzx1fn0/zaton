@@ -112,11 +112,25 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
-    gunModel = camera->mView;
-    gunModel.translate(vec3(0, -0, 0.47f));
-    gunModel.scale(vec3(-.094));
-   // gunModel = inverse(camera->mView);
-    renderer->setModelMatrix(&gunModel);
+    
+    mat4 invModelview;
+
+    invModelview.translate(player->pos);
+    invModelview.rotateY(player->rot.y);
+    invModelview.rotateX(player->rot.x);
+
+
+    mat4 tr;
+    tr.translate(vec3(5.0f, -5.0f, -10.0f));
+
+
+    mat4 gunMV = invModelview * tr;
+    //drawGun(renderer, mvp * gunMV, modelview, gunMV, camPos);
+    //gunModel = camera->mView;
+    //gunModel.scale(vec3(-.094));
+    //gunModel = inverse(camera->mView);
+    renderer->setModelMatrix(&gunMV);
+    //renderer->setViewProjMatrix(&camera->mProj);
     gunTex->bind(0);
     renderer->batch[4]->draw_mesh();
 
