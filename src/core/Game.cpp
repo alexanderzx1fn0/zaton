@@ -115,14 +115,25 @@ void Game::render() {
     
     mat4 invModelview;
 
-    invModelview.translate(player->pos);
+    invModelview.translate(player->pos + vec3(0.0, PLAYER_HEIGHT, 0.0));
     invModelview.rotateY(player->rot.y);
     invModelview.rotateX(player->rot.x);
+    invModelview.rotateZ(player->rot.z);
 
+    mat4 e = invModelview * camera->mView;
+    /*
+    printf("%f %f %f %f\n %f %f %f %f\n %f %f %f %f\n %f %f %f %f\n",
+	    e.e00,e.e10, e.e20,e.e30,
+	    e.e01,e.e11, e.e21, e.e31,
+	    e.e02,e.e12, e.e22,e.e32,
+	    e.e03,e.e13, e.e23, e.e33);
+    */
 
     mat4 tr;
-    tr.scale(.4f);
-    tr.translate(vec3(3.0f, 0.5f, -4.0f));
+    tr.translate(vec3(3.0f, -2.0f, -4.0f));
+    //tr.scale(.4f);
+    //tr.rotateX(DEG2RAD*(-15.0f));
+    //tr.rotateY(DEG2RAD*(10.0f));
 
 
 
