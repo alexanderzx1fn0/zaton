@@ -121,7 +121,9 @@ void Game::render() {
 
 
     mat4 tr;
-    tr.translate(vec3(5.0f, -5.0f, -10.0f));
+    tr.scale(.4f);
+    tr.translate(vec3(3.0f, 0.5f, -4.0f));
+
 
 
     mat4 gunMV = invModelview * tr;
