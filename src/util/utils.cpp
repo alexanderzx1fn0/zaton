@@ -194,14 +194,6 @@ mat4 mat4_mul_scalar(const mat4& m, float f)
 }
 
 
-// TODO: it need to move int physics folder
-bool SphereSphere(const Sphere& s1, const Sphere& s2) {
-	float radiiSum = s1.radius + s2.radius;
-	vec3 t = s1.center - s2.center;
-	float sqDistance = t.length2();
-	return sqDistance < radiiSum * radiiSum;
-}
-
 int32 clamp(int32 x, int32 a, int32 b) {
     if (x < a) return a;
     if (x > b) return b;
@@ -305,7 +297,9 @@ bool Triangle::intersect(const vec3& rayPos, const vec3& rayDir, bool twoSide, f
     }
     return false;
 }
-Sphere::Sphere(const vec3& center, float radius) : center(center), radius(radius) {}
+Sphere::Sphere(const vec3& center, float radius) : center(center), radius(radius) {
+    radiusSQ = radius * radius;
+}
 
 bool Sphere::intersect(const Triangle& tri, vec3& n, float& t) {
     vec3 p = tri.closestPoint(center);
@@ -317,4 +311,9 @@ bool Sphere::intersect(const Triangle& tri, vec3& n, float& t) {
     n = v.normal();
     t = radius - sqrtf(d);
     return true;
+}
+
+bool Sphere::intersect(const Sphere& s) const
+{
+    return (center - s.center).length2() <= (radius + s.radius) * (radius + s.radius);
 }

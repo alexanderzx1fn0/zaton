@@ -271,12 +271,15 @@ struct Triangle {
 struct Sphere {
     vec3  center;
     float radius;
+    float radiusSQ;
 
     Sphere(const vec3& center, float radius);
 
     bool intersect(const Triangle& tri, vec3& n, float& t);
+    bool intersect(const Sphere& s) const;
 };
-bool SphereSphere(const Sphere& s1, const Sphere& s2);
+
+
 /*
 struct Stream {
     FILE *file;

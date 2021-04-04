@@ -4,17 +4,59 @@
 #include "util/utils.h"
 #include "scene/level2.h"
 
+#include "Weapon.h"
+
+extern mat4 medKitTranslate;
 extern vec3 medKitPos;
 extern bool visible;
+
+void swap(float& a, float& b)
+{
+    float temp;
+    temp = a;
+    a = b;
+    b = temp;
+    b = a;
+}
+
+bool intersect(const vec3& ro, const vec3& rd, const Sphere& s, float& t)
+{
+    float t0, t1;
+
+    vec3 L = s.center - ro;
+    float tca = L.dot(rd);
+    float d2 = L.dot(L) - tca*tca;
+    if (d2 > s.radiusSQ)
+    {
+        return false;
+    }
+
+    float thc = sqrt(s.radiusSQ - d2);
+
+    t0 = tca - thc;
+    t1 = tca + thc;
+
+    if (t0 > t1) { swap(t0, t1); }
+    if (t0 < 0.0f) {
+        t0 = t1;
+        if (t0 < 0) {return false; }
+    }
+
+    t = t0;
+
+    return true;
+}
 
 Player::Player(PlayerType type)
     : BasePlayer(), type(type), pos(0.0f, 0.0f, 1.0f), rot(0.0f, 0.0f, 0.0f), onGround(false), velocity(0.0f)
 {
+        weapon = new Weapon();
         respawn();
 }
 
 
 Player::~Player() {
+    delete weapon;
 }
 
 void Player::respawn() {
@@ -62,8 +104,10 @@ void Player::update() {
         if (GInput->keyStates[KEY_W]) input |= UP;
         if (GInput->keyStates[KEY_S]) input |= DOWN;
         if (GInput->keyStates[KEY_SPACE]) input |= JUMP;
-        if (GInput->mouseStates[MOUSE_LEFT]) input |= FIRE_A;
-        if (GInput->mouseStates[MOUSE_RIGHT]) input |= FIRE_B;
+        //if (GInput->mouseStates[MOUSE_LEFT]) input |= FIRE_A;
+        //if (GInput->mouseStates[MOUSE_RIGHT]) input |= FIRE_B;
+        if (GInput->keyStates[VK_LBUTTON]) input |= FIRE_A;
+        //if (GInput->mouseStates[MOUSE_RIGHT]) input |= FIRE_B;
 
         // i think it is direction vector
 
@@ -106,9 +150,32 @@ void Player::update() {
 	collideT();
         collide();
 
+        // compute ray origin and ray direction of the ray
+        vec3 ro = pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f);
+        mat4 tempView;
+        tempView.identity();
+        tempView.rotateY(rot.y);
+        tempView.rotateX(rot.x);
+        tempView.rotateZ(rot.z);
+        vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
+
+        mat4 mInv = medKitTranslate.inverseOrtho();
+        vec3 rayPosLocal = mInv * vec4(ro, 1.0);
+        vec3 rayDirLocal = mInv * vec4(rd, 0.0);
 
 
-	if (SphereSphere(Sphere(pos, .5f), Sphere(medKitPos, 1.f)))
+        // step 2: find ray sphere intersection
+        float t = 0;
+        if (intersect(ro, rd, Sphere(vec3(medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23), .5f), t))
+        {
+            printf("Hit %f\n", t);
+            visible = false;
+        }
+
+
+
+	//if (SphereSphere(Sphere(pos, .5f), Sphere(medKitPos, 1.f)))
+        if (Sphere(pos, .5f).intersect(Sphere(medKitPos, 1.f)))
 	{
 	    //printf("Collide with medKit\n");
 	    visible = false;
@@ -118,17 +185,10 @@ void Player::update() {
 	    //printf("FAILED\n");
 	}
 
-	//printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
-	//printf("MedKitPos of the player: %f %f %f\n", medKitPos.x, medKitPos.y, medKitPos.z);
+	printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
+	printf("MedKitPos of the player: %f %f %f\n", medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23);
 
-	if (input & FIRE_A)
-	{
-	    printf("FIRE A\n");
-	}
-	if (input & FIRE_B)
-	{
-	    printf("FIRE B\n");
-	}
+        //weapon->fire(pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f), rot, (input & FIRE_A));
 }
 
 void Player::collide() {

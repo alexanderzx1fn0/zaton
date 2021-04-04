@@ -189,6 +189,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_LBUTTONUP     :
 	{
             GInput->keyStates[VK_LBUTTON] = message != WM_LBUTTONUP;
+	    GInput->mouseStates[MOUSE_LEFT] = message != WM_LBUTTONUP;
             GInput->mouseCaptured = true;
             break;
 	}
@@ -197,6 +198,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_RBUTTONUP     :
 	{
             GInput->keyStates[VK_RBUTTON] = message != WM_RBUTTONUP;
+	    GInput->mouseStates[MOUSE_RIGHT] = message != WM_RBUTTONUP;
             break;
 	}
         case WM_MBUTTONDOWN   :

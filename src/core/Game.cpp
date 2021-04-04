@@ -21,6 +21,7 @@
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
 vec3 medKitPos;
+mat4 medKitTranslate;
 bool visible = true;
 mat4 gunModel;
 
@@ -75,7 +76,10 @@ bool Game::initGame()
     gunTex = new Texture("../data/textures/simpGun_diffuse.png");
 
 
-    medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
+    //medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
+    medKitPos = vec3(0.0f, 2.5186f, 0.0f);
+    medKitTranslate.translate(medKitPos);
+
 
     //gunModel = glm::rotate(camPosition, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
 
@@ -103,6 +107,9 @@ void Game::render() {
     renderer->batch[2]->draw_mesh();
     floorTex->bind(0);
     renderer->batch[1]->draw_mesh();
+
+
+    renderer->setModelMatrix(&medKitTranslate);
     medKitTex->bind(0);
     if (!visible)
     {

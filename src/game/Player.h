@@ -42,6 +42,7 @@ public:
     vec3 pos;
     vec3 rot;
     vec3 velocity;
+    class Weapon* weapon;
 
     //Level *model; // it's may be full character or just gun model
 

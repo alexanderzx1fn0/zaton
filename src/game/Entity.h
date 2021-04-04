@@ -11,6 +11,7 @@ public:
 private:
     vec3 pos;
     vec3 rot;
+    //Sphere s;
     //OBJ * obj; // MESH data
 };
 
