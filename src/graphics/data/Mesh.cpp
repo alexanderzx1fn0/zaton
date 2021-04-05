@@ -2,6 +2,29 @@
 #include "Mesh.h"
 
 Mesh::Mesh(const float* vertices, int nVertices,
+	const unsigned int* indices, int nIndices)
+{
+
+    index_count = nIndices;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(float) * 3, vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); // position
+    glEnableVertexAttribArray( 0 );
+
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
+    float *ptr = 0;
+    glBindVertexArray(0);
+}
+
+Mesh::Mesh(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord)
 {
     index_count = nIndices;

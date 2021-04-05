@@ -185,8 +185,8 @@ void Player::update() {
 	    //printf("FAILED\n");
 	}
 
-	printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
-	printf("MedKitPos of the player: %f %f %f\n", medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23);
+	//printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
+	//printf("MedKitPos of the player: %f %f %f\n", medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23);
 
         //weapon->fire(pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f), rot, (input & FIRE_A));
 }

@@ -116,6 +116,7 @@ struct mat3 {
     }
 };
 
+
 struct mat4 {
     mat4() :
 	  e00(1.0f), e10(0.0f), e20(0.0f), e30(0.0f),
@@ -280,44 +281,4 @@ struct Sphere {
 };
 
 
-/*
-struct Stream {
-    FILE *file;
-    int  pos;
-    int  size;
-
-    Stream(const char *name) : file(NULL), pos(0), size(0) {
-        file = fopen(name, "rb");
-        fseek(file, 0, SEEK_END);
-        size = ftell(file);
-        fseek(file, 0, SEEK_SET);
-    }
-
-    ~Stream() {
-        fclose(file);
-    }
-
-    void seek(int offset) {
-        fseek(file, offset, SEEK_CUR);
-        pos += offset;
-    }
-
-    int read(void *data, int count) {
-        int res = fread(data, 1, count, file);
-        pos += res;
-        return res;
-    }
-
-    char* readStr() {
-        uint8 len;
-        read(&len, 1);
-        if (len == 0)
-            return NULL;
-        char *str = new char[len + 1];
-        read(str, len);
-        str[len] = 0;
-        return str;
-    }
-};
-*/
 #endif

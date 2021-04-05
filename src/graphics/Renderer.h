@@ -13,6 +13,9 @@ public:
     virtual void drawIndexed(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord) = 0;
 
+    virtual void drawIndexedTest(const float* vertices, int nVertices,
+	const unsigned int* indices, int nIndices) = 0;
+
     virtual void setProjectionMatrix(const mat4* matProj) = 0;
     virtual void setViewMatrix(const mat4* matView) = 0;
     virtual void setModelMatrix(const mat4* matModel) = 0;

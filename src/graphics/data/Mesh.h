@@ -9,6 +9,8 @@ class Mesh
 public:
     Mesh(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord);
+    Mesh(const float* vertices, int nVertices,
+	const unsigned int* indices, int nIndices);
 
     ~Mesh();
 

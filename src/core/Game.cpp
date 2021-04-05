@@ -18,7 +18,31 @@
 
 #include "gui/UI.h"
 
+#include "util/Stream.h"
+
 #define min(a,b) (((a) < (b)) ? (a) : (b))
+
+Stream stream("../data/mesh.lvl");
+    int nIndices;
+    int nVertices;
+    enum Type : int { MESH, LAMP} type;
+    struct Vertex
+    {
+        vec3 coord;
+    };
+    typedef int Index;
+    unsigned int* indices = NULL;
+    //Vertex* vertices = NULL;
+    float *vertices = NULL;
+
+struct Mat4
+{
+    float e00, e10, e20, e30,
+          e01, e11, e21, e31,
+          e02, e12, e22, e32,
+          e03, e13, e23, e33;
+};
+    Mat4 matrix;
 
 vec3 medKitPos;
 mat4 medKitTranslate;
@@ -43,8 +67,38 @@ Game::~Game()
     delete renderer;
 }
 
+
+
 bool Game::initGame()
 {
+
+    
+    printf("%d\n", sizeof(type));
+
+
+    while (stream.pos < stream.size)
+    {
+        stream.read(&type, sizeof(type));
+        stream.read(&matrix, sizeof(Mat4));
+
+        if (type != MESH) continue;
+
+        stream.read(&nIndices, sizeof(nIndices));
+        indices = new unsigned[nIndices];
+        stream.read(indices, nIndices * sizeof(unsigned int));
+
+        stream.read(&nVertices, sizeof(nVertices));
+        vertices = new float[nVertices * 3];
+        stream.read(vertices, nVertices * sizeof(vertices) * 3);
+    }
+    printf("Done loading\n");
+    for (int i = 0; i < nVertices; i++)
+    {
+        printf("%f %f %f\n", vertices[i * 3 + 0], vertices[i * 3 + 1], vertices[i * 3 + 2]);
+    }
+
+
+        
     ui = new UI(mWidth, mHeight);
 
     cube = new Cube; 
@@ -52,7 +106,7 @@ bool Game::initGame()
     camera = new Camera;
     player = new Player(Player::PLAYER_1);
     camera->setAspect((float)mWidth / (float)mHeight);
-    camera->freeCam = false;
+    camera->freeCam = true;
 
 
     renderer->drawIndexed(WallPositions, WallVertices,
@@ -65,9 +119,14 @@ bool Game::initGame()
 			    medKitIndices, medKitIndicesCount, medKitNormals, medKitTexcoords);
     renderer->drawIndexed(GunPositions, GunVertices,
 			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
+
+    renderer->drawIndexedTest(vertices, nVertices, indices, nIndices);
+
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
     
+    delete [] indices;
+    delete [] vertices;
 
     
     floorTex = new Texture("../data/textures/floor01.jpg");
@@ -119,6 +178,7 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
+    renderer->batch[5]->draw_mesh();
     
     mat4 invModelview;
 
@@ -147,6 +207,7 @@ void Game::render() {
     renderer->setModelMatrix(&gunMV);
     gunTex->bind(0);
     renderer->batch[4]->draw_mesh();
+
 
 
 

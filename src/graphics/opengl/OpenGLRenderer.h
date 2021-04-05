@@ -13,6 +13,9 @@ public:
     void drawIndexed(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord);
 
+    void drawIndexedTest(const float* vertices, int nVertices,
+	const unsigned int* indices, int nIndices);
+
     void setProjectionMatrix(const mat4* matProj);
     void setViewMatrix(const mat4* matView);
     void setModelMatrix(const mat4* matModel);
@@ -22,7 +25,7 @@ public:
     void changeShader(Shader* shader);
 
     Mesh* mesh;
-    Mesh* batch[5];// TODO: actually it should be arbitrary size array
+    Mesh* batch[6];// TODO: actually it should be arbitrary size array
     static int nMeshes;
 };
 

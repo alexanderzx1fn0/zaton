@@ -69,6 +69,8 @@ ${PLATFORM_SOURCES}
 
 "src/util/utils.h"
 "src/util/utils.cpp"
+"src/util/Stream.h"
+"src/util/Stream.cpp"
 
 "src/physics/Collision.h"
 "src/physics/Collision.cpp"

@@ -25,7 +25,7 @@ void Camera::update()
     if (freeCam) {
 	vec3 dir   = vec3(mView.e20, mView.e21, mView.e22);
 	vec3 right = vec3(mView.e00, mView.e01, mView.e02);
-	float k = deltaTime * .3f;
+	float k = deltaTime * 4.0f;
 	// TODO:: in window is CAPITAL LETTERS i need to fix that
 	if (GInput->keyStates[KEY_A])
 	{
