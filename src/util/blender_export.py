@@ -10,7 +10,7 @@ MatGL = Matrix(([-1, 0, 0, 0],
 InvMatGL = MatGL.inverted()
 
 def writeTransform(file, obj):
-    m = MatGL * obj.matrix_local * InvMatGL
+    m = MatGL @ obj.matrix_local @ InvMatGL
     m.transpose()
     for row in m:
         for value in row:

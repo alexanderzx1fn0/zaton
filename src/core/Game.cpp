@@ -141,6 +141,7 @@ bool Game::initGame()
 
 
     //gunModel = glm::rotate(camPosition, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
+    printf("%f %f %f", matrix.e03, matrix.e13, matrix.e23);
 
 
 
