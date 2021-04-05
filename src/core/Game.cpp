@@ -42,7 +42,7 @@ struct Mat4
           e02, e12, e22, e32,
           e03, e13, e23, e33;
 };
-    Mat4 matrix;
+    mat4 matrix;
 
 vec3 medKitPos;
 mat4 medKitTranslate;
@@ -79,7 +79,7 @@ bool Game::initGame()
     while (stream.pos < stream.size)
     {
         stream.read(&type, sizeof(type));
-        stream.read(&matrix, sizeof(Mat4));
+        stream.read(&matrix, sizeof(mat4));
 
         if (type != MESH) continue;
 
@@ -88,14 +88,16 @@ bool Game::initGame()
         stream.read(indices, nIndices * sizeof(unsigned int));
 
         stream.read(&nVertices, sizeof(nVertices));
-        vertices = new float[nVertices * 3];
+        vertices = new float[nVertices * 3]; // Each vertex has three floats (x, y, z)
         stream.read(vertices, nVertices * sizeof(vertices) * 3);
     }
     printf("Done loading\n");
+    /* print vertices
     for (int i = 0; i < nVertices; i++)
     {
         printf("%f %f %f\n", vertices[i * 3 + 0], vertices[i * 3 + 1], vertices[i * 3 + 2]);
     }
+    */
 
 
         
@@ -106,7 +108,7 @@ bool Game::initGame()
     camera = new Camera;
     player = new Player(Player::PLAYER_1);
     camera->setAspect((float)mWidth / (float)mHeight);
-    camera->freeCam = true;
+    camera->freeCam = false;
 
 
     renderer->drawIndexed(WallPositions, WallVertices,
@@ -179,6 +181,7 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
+    renderer->setModelMatrix(&matrix);
     renderer->batch[5]->draw_mesh();
     
     mat4 invModelview;
@@ -207,6 +210,7 @@ void Game::render() {
     mat4 gunMV = invModelview * tr;
     renderer->setModelMatrix(&gunMV);
     gunTex->bind(0);
+    glClear(GL_DEPTH_BUFFER_BIT); // clear depth in order to weapon don't embedded in texture
     renderer->batch[4]->draw_mesh();
 
 
