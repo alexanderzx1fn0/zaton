@@ -104,9 +104,9 @@ void Player::update() {
         if (GInput->keyStates[KEY_W]) input |= UP;
         if (GInput->keyStates[KEY_S]) input |= DOWN;
         if (GInput->keyStates[KEY_SPACE]) input |= JUMP;
-        //if (GInput->mouseStates[MOUSE_LEFT]) input |= FIRE_A;
+        if (GInput->mouseStates[MOUSE_LEFT]) input |= FIRE_A;
         //if (GInput->mouseStates[MOUSE_RIGHT]) input |= FIRE_B;
-        if (GInput->keyStates[VK_LBUTTON]) input |= FIRE_A;
+        //if (GInput->keyStates[VK_LBUTTON]) input |= FIRE_A;
         //if (GInput->mouseStates[MOUSE_RIGHT]) input |= FIRE_B;
 
         // i think it is direction vector
@@ -166,7 +166,7 @@ void Player::update() {
 
         // step 2: find ray sphere intersection
         float t = 0;
-        if (intersect(ro, rd, Sphere(vec3(medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23), .5f), t))
+        if (intersect(ro, rd, Sphere(vec3(medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23), .2f), t))
         {
             printf("Hit %f\n", t);
             visible = false;
