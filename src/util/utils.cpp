@@ -297,6 +297,9 @@ bool Triangle::intersect(const vec3& rayPos, const vec3& rayDir, bool twoSide, f
     }
     return false;
 }
+Sphere::Sphere()
+    : center(0.0f), radius(0.0f)
+{}
 Sphere::Sphere(const vec3& center, float radius) : center(center), radius(radius) {
     radiusSQ = radius * radius;
 }

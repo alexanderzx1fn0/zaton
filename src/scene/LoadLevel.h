@@ -5,7 +5,7 @@
 #include "level2.h"
 #include "simpGun.h"
 
-bool ZatonLoadLevel(const char* file);
+bool ZatonLoadLevel();
 void ZatonClearLevel();
 
 

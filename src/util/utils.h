@@ -274,6 +274,7 @@ struct Sphere {
     float radius;
     float radiusSQ;
 
+    Sphere();
     Sphere(const vec3& center, float radius);
 
     bool intersect(const Triangle& tri, vec3& n, float& t);

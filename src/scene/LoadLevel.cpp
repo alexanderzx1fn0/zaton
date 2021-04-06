@@ -2,7 +2,7 @@
 #include "graphics/data/Mesh.h"
 
 
-bool ZatonLoadLevel(const char* file)
+bool ZatonLoadLevel()
 {
     return true;
 }

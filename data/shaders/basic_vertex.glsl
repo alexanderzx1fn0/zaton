@@ -15,9 +15,11 @@ uniform mat4 modelView;
 uniform mat4 uModelM;
 
 out vec2 uv;
+out vec3 n;
 
 void main()
 {
+    n = normal;
     uv = texcoord;
     gl_Position = uViewProjM * uModelM * vec4(position, 1.0f);
 }

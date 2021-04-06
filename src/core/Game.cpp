@@ -77,6 +77,10 @@ bool Game::initGame()
     printf("%d\n", sizeof(type));
 
 
+/*
+    while (stream.pos < stream.size)
+	(entities[entityCount++] = new Entity(stream));
+*/
     while (stream.pos < stream.size)
     {
         stream.read(&type, sizeof(type));

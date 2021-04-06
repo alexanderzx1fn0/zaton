@@ -40,6 +40,7 @@ ${PLATFORM_SOURCES}
 "src/graphics/Texture.cpp"
 "src/graphics/Sprite.h"
 "src/graphics/Sprite.cpp"
+"src/graphics/Model.h"
 
 
 "src/input/Input.h"
