@@ -29,6 +29,13 @@ void OpenGLRenderer::drawIndexedTest(const float* vertices, int nVertices, const
     batch[OpenGLRenderer::nMeshes++] = new Mesh(vertices, nVertices, indices, nIndices);
 }
 
+void OpenGLRenderer::drawIndexedModel(const Vertex* vertices, int nVertices,
+        const unsigned int* indices, int nIndices)
+{
+    batch[OpenGLRenderer::nMeshes++] = new Mesh(vertices, nVertices, indices, nIndices);
+
+}
+
 
 
 void OpenGLRenderer::setProjectionMatrix(const mat4* matProj)

@@ -16,6 +16,9 @@ public:
     void drawIndexedTest(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices);
 
+    void drawIndexedModel(const Vertex* vertices, int nVertices,
+        const unsigned int* indices, int nIndices);
+
     void setProjectionMatrix(const mat4* matProj);
     void setViewMatrix(const mat4* matView);
     void setModelMatrix(const mat4* matModel);

@@ -22,18 +22,18 @@
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
-Stream stream("../data/mesh.lvl");
+Stream stream("../data/mesh.geom");
     int nIndices;
     int nVertices;
+    int nTexcoords;
     enum Type : int { MESH, LAMP} type;
-    struct Vertex
-    {
-        vec3 coord;
-    };
+
     typedef int Index;
     unsigned int* indices = NULL;
-    //Vertex* vertices = NULL;
-    float *vertices = NULL;
+    Vertex* vertices = NULL;
+    Texture* barrelTex;
+    //float *vertices = NULL;
+    //float* texcoords = NULL;
 
 struct Mat4
 {
@@ -63,6 +63,7 @@ Game::~Game()
     delete wallTex;
     delete medKitTex;
     delete gunTex;
+    delete barrelTex;
 
     delete renderer;
 }
@@ -83,19 +84,29 @@ bool Game::initGame()
 
         if (type != MESH) continue;
 
+        char* tex1 = stream.readStr();
+        char* tex2 = stream.readStr();
+        char* tex3 = stream.readStr();
+        if  (tex1) barrelTex = new Texture(tex1);
+
+
+        delete[] tex1;
+        delete[] tex2;
+        delete[] tex3;
+
         stream.read(&nIndices, sizeof(nIndices));
         indices = new unsigned[nIndices];
         stream.read(indices, nIndices * sizeof(unsigned int));
 
         stream.read(&nVertices, sizeof(nVertices));
-        vertices = new float[nVertices * 3]; // Each vertex has three floats (x, y, z)
-        stream.read(vertices, nVertices * sizeof(vertices) * 3);
+        vertices = new Vertex[nVertices]; // Each vertex has three floats (x, y, z)
+        stream.read(vertices, nVertices * sizeof(Vertex));
     }
     printf("Done loading\n");
-    /* print vertices
+    /*
     for (int i = 0; i < nVertices; i++)
     {
-        printf("%f %f %f\n", vertices[i * 3 + 0], vertices[i * 3 + 1], vertices[i * 3 + 2]);
+        printf("Texcoords: %f %f\n", vertices[i].texcoord.x, vertices[i].texcoord.y);
     }
     */
 
@@ -122,7 +133,8 @@ bool Game::initGame()
     renderer->drawIndexed(GunPositions, GunVertices,
 			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
 
-    renderer->drawIndexedTest(vertices, nVertices, indices, nIndices);
+    //renderer->drawIndexedTest(vertices, nVertices, indices, nIndices);
+    renderer->drawIndexedModel(vertices, nVertices, indices, nIndices);
 
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
@@ -157,7 +169,7 @@ void Game::render() {
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, mWidth, mHeight);
 
@@ -181,6 +193,7 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
+    barrelTex->bind(0);
     renderer->setModelMatrix(&matrix);
     renderer->batch[5]->draw_mesh();
     

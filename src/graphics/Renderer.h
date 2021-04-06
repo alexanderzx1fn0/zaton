@@ -4,6 +4,12 @@
 #include "Shader.h"
 #include "util/utils.h"
 
+struct Vertex
+{
+    vec3 coord;
+    vec3 normal;
+    vec2 texcoord;
+};
 class Renderer
 {
 public:
@@ -15,6 +21,9 @@ public:
 
     virtual void drawIndexedTest(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices) = 0;
+
+    virtual void drawIndexedModel(const Vertex* vertices, int nVertices,
+        const unsigned int* indices, int nIndices) = 0;
 
     virtual void setProjectionMatrix(const mat4* matProj) = 0;
     virtual void setViewMatrix(const mat4* matView) = 0;

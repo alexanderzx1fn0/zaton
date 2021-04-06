@@ -3,7 +3,6 @@
 uniform sampler2D uDiffuse;
 uniform vec3 color;
 out vec4 fragColor;
-in vec3 n;
 in vec2 uv;
 
 void main()
