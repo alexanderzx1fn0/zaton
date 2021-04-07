@@ -72,7 +72,7 @@ bool Game::initGame()
     camera = new Camera;
     player = new Player(Player::PLAYER_1);
     camera->setAspect((float)mWidth / (float)mHeight);
-    camera->freeCam = true;
+    camera->freeCam = false;
 
 
     renderer->drawIndexed(WallPositions, WallVertices,
@@ -133,25 +133,25 @@ void Game::render() {
     glViewport(0, 0, mWidth, mHeight);
 
     renderer->currentShader->bind();
-    wallTex->bind(0);
-    mat4 m;
-    renderer->setModelMatrix(&m);
-    renderer->batch[0]->draw_mesh();
-    renderer->batch[2]->draw_mesh();
-    floorTex->bind(0);
-    renderer->batch[1]->draw_mesh();
+    //wallTex->bind(0);
+    //mat4 m;
+    //renderer->setModelMatrix(&m);
+    //renderer->batch[0]->draw_mesh();
+    //renderer->batch[2]->draw_mesh();
+    //floorTex->bind(0);
+    //renderer->batch[1]->draw_mesh();
 
 
-    renderer->setModelMatrix(&medKitTranslate);
-    medKitTex->bind(0);
-    if (!visible)
-    {
-	glBindVertexArray(0);
-    }
-    else
-    {
-	renderer->batch[3]->draw_mesh();
-    }
+    //renderer->setModelMatrix(&medKitTranslate);
+    //medKitTex->bind(0);
+    //if (!visible)
+    //{
+	//glBindVertexArray(0);
+    //}
+    //else
+    //{
+	//renderer->batch[3]->draw_mesh();
+    //}
     entities[0]->obj.diffuseMap->bind(0);
     renderer->setModelMatrix(&entities[0]->obj.matrix);
     renderer->batch[5]->draw_mesh();

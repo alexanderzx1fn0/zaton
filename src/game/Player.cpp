@@ -5,6 +5,7 @@
 #include "scene/level2.h"
 
 #include "Weapon.h"
+#include "Entity.h"
 
 extern mat4 medKitTranslate;
 extern vec3 medKitPos;
@@ -147,7 +148,7 @@ void Player::update() {
         onGround = false;
 
 	// check collide
-	collideT();
+	//collideT();
         collide();
 
         // compute ray origin and ray direction of the ray
@@ -192,11 +193,11 @@ void Player::update() {
 }
 
 void Player::collide() {
-    for (int i = 0; i < FloorIndicesCount; i += 3) {
-
-	vec3 a = vec3(FloorPositions[FloorIndices[i + 0] * 3 + 0], FloorPositions[FloorIndices[i + 0] * 3 + 1], FloorPositions[FloorIndices[i + 0] * 3+2]);
-	vec3 b = vec3(FloorPositions[FloorIndices[i + 1] * 3 + 0], FloorPositions[FloorIndices[i + 1] * 3 + 1], FloorPositions[FloorIndices[i + 1] * 3+2]);
-	vec3 c = vec3(FloorPositions[FloorIndices[i + 2] * 3 + 0], FloorPositions[FloorIndices[i + 2] * 3 + 1], FloorPositions[FloorIndices[i + 2] * 3+2]);
+        for (int i = 0; i < entities[1]->obj.nIndices; i+=3)
+        {
+            vec3 a = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3+2]);
+            vec3 b = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3+2]);
+            vec3 c = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3+2]);
 
 	vec3 n;
 	float t;
