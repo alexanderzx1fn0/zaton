@@ -8,16 +8,18 @@ class Entity
 {
 public:
     Entity();
+    ~Entity();
 
-    Model* _obj;
+    Model obj;
 
     Sphere s;
     vec3 pos;
     vec3 rot;
 };
 
-extern Entity* entities[32];
-// it's will member of Level class
-extern entityCount = 0;
 
+extern Entity* entity;
+extern int entityCount;
+typedef Entity* GEntity;
+extern GEntity entities[];
 #endif

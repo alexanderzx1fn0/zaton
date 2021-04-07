@@ -13,6 +13,7 @@
 
 #include "game/Camera.h"
 #include "game/Player.h"
+#include "game/Entity.h"
 
 #include "physics/Collision.h"
 
@@ -21,28 +22,6 @@
 #include "util/Stream.h"
 
 #define min(a,b) (((a) < (b)) ? (a) : (b))
-
-Stream stream("../data/mesh.geom");
-    int nIndices;
-    int nVertices;
-    int nTexcoords;
-    enum Type : int { MESH, LAMP} type;
-
-    typedef int Index;
-    unsigned int* indices = NULL;
-    Vertex* vertices = NULL;
-    Texture* barrelTex;
-    //float *vertices = NULL;
-    //float* texcoords = NULL;
-
-struct Mat4
-{
-    float e00, e10, e20, e30,
-          e01, e11, e21, e31,
-          e02, e12, e22, e32,
-          e03, e13, e23, e33;
-};
-    mat4 matrix;
 
 vec3 medKitPos;
 mat4 medKitTranslate;
@@ -54,6 +33,7 @@ Game::Game(int width, int height) : mWidth(width), mHeight(height)
 
 Game::~Game()
 {
+    ClearLevel();
     delete ui;
     delete player;
     delete camera;
@@ -63,7 +43,6 @@ Game::~Game()
     delete wallTex;
     delete medKitTex;
     delete gunTex;
-    delete barrelTex;
 
     delete renderer;
 }
@@ -74,39 +53,9 @@ bool Game::initGame()
 {
 
     
-    printf("%d\n", sizeof(type));
-
-
-/*
-    while (stream.pos < stream.size)
-	(entities[entityCount++] = new Entity(stream));
-*/
-    while (stream.pos < stream.size)
-    {
-        stream.read(&type, sizeof(type));
-        stream.read(&matrix, sizeof(mat4));
-
-        if (type != MESH) continue;
-
-        char* tex1 = stream.readStr();
-        char* tex2 = stream.readStr();
-        char* tex3 = stream.readStr();
-        if  (tex1) barrelTex = new Texture(tex1);
-
-
-        delete[] tex1;
-        delete[] tex2;
-        delete[] tex3;
-
-        stream.read(&nIndices, sizeof(nIndices));
-        indices = new unsigned[nIndices];
-        stream.read(indices, nIndices * sizeof(unsigned int));
-
-        stream.read(&nVertices, sizeof(nVertices));
-        vertices = new Vertex[nVertices]; // Each vertex has three floats (x, y, z)
-        stream.read(vertices, nVertices * sizeof(Vertex));
-    }
-    printf("Done loading\n");
+    LoadLevel();
+    LoadCollidableGeometry();
+    printf("Load done\n");
     /*
     for (int i = 0; i < nVertices; i++)
     {
@@ -123,7 +72,7 @@ bool Game::initGame()
     camera = new Camera;
     player = new Player(Player::PLAYER_1);
     camera->setAspect((float)mWidth / (float)mHeight);
-    camera->freeCam = false;
+    camera->freeCam = true;
 
 
     renderer->drawIndexed(WallPositions, WallVertices,
@@ -138,14 +87,20 @@ bool Game::initGame()
 			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
 
     //renderer->drawIndexedTest(vertices, nVertices, indices, nIndices);
-    renderer->drawIndexedModel(vertices, nVertices, indices, nIndices);
+
+    renderer->drawIndexedModel(entities[0]->obj.vertices,
+                              entities[0]->obj.nVertices,
+                              entities[0]->obj.indices,
+                              entities[0]->obj.nIndices);
+
+    renderer->drawIndexedTest(entities[1]->obj.f_vertices,
+                              entities[1]->obj.nVertices,
+                              entities[1]->obj.indices,
+                              entities[1]->obj.nIndices);
 
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
     
-    delete [] indices;
-    delete [] vertices;
-
     
     floorTex = new Texture("../data/textures/floor01.jpg");
     wallTex = new Texture("../data/textures/small_brick1.bmp");
@@ -159,7 +114,7 @@ bool Game::initGame()
 
 
     //gunModel = glm::rotate(camPosition, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
-    printf("%f %f %f", matrix.e03, matrix.e13, matrix.e23);
+    //printf("%f %f %f", matrix.e03, matrix.e13, matrix.e23);
 
 
 
@@ -197,9 +152,11 @@ void Game::render() {
     {
 	renderer->batch[3]->draw_mesh();
     }
-    barrelTex->bind(0);
-    renderer->setModelMatrix(&matrix);
+    entities[0]->obj.diffuseMap->bind(0);
+    renderer->setModelMatrix(&entities[0]->obj.matrix);
     renderer->batch[5]->draw_mesh();
+    renderer->setModelMatrix(&entities[1]->obj.matrix);
+    renderer->batch[6]->draw_mesh();
     
     mat4 invModelview;
 

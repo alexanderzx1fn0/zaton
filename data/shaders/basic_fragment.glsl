@@ -8,6 +8,6 @@ in vec3 n;
 
 void main()
 {
-    //fragColor = texture(uDiffuse, uv.xy);
-    fragColor = vec4(normalize(n), 1.0);
+    fragColor = texture(uDiffuse, uv.xy);
+    //fragColor = vec4(normalize(n), 1.0);
 }

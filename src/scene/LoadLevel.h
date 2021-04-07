@@ -5,8 +5,10 @@
 #include "level2.h"
 #include "simpGun.h"
 
-bool ZatonLoadLevel();
-void ZatonClearLevel();
+bool LoadLevel();
+void ClearLevel();
 
+bool LoadCollidableGeometry();
+void ClearCollidableGeometry();
 
 #endif

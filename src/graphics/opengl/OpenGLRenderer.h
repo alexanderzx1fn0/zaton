@@ -28,7 +28,7 @@ public:
     void changeShader(Shader* shader);
 
     Mesh* mesh;
-    Mesh* batch[6];// TODO: actually it should be arbitrary size array
+    Mesh* batch[10];// TODO: actually it should be arbitrary size array
     static int nMeshes;
 };
 
