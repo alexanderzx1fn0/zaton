@@ -37,11 +37,7 @@ Game::~Game()
     delete ui;
     delete player;
     delete camera;
-    delete cube;
 
-    delete floorTex;
-    delete wallTex;
-    delete medKitTex;
     delete gunTex;
 
     delete renderer;
@@ -67,7 +63,6 @@ bool Game::initGame()
         
     ui = new UI(mWidth, mHeight);
 
-    cube = new Cube; 
     renderer = new OpenGLRenderer;
     camera = new Camera;
     player = new Player(Player::PLAYER_1);
@@ -75,18 +70,9 @@ bool Game::initGame()
     camera->freeCam = false;
 
 
-    renderer->drawIndexed(WallPositions, WallVertices,
-			    WallIndices, WallIndicesCount, WallNormals, WallTexcoords);
-    renderer->drawIndexed(FloorPositions, FloorVertices,
-			    FloorIndices, FloorIndicesCount, FloorNormals, FloorTexcoords);
-    renderer->drawIndexed(CeilingPositions, CeilingVertices,
-			    CeilingIndices, CeilingIndicesCount, CeilingNormals, CeilingTexcoords);
-    renderer->drawIndexed(medKitPositions, medKitVertices,
-			    medKitIndices, medKitIndicesCount, medKitNormals, medKitTexcoords);
     renderer->drawIndexed(GunPositions, GunVertices,
 			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
 
-    //renderer->drawIndexedTest(vertices, nVertices, indices, nIndices);
 
     renderer->drawIndexedModel(entities[0]->obj.vertices,
                               entities[0]->obj.nVertices,
@@ -102,24 +88,12 @@ bool Game::initGame()
 			"../data/shaders/basic_fragment.glsl");
     
     
-    floorTex = new Texture("../data/textures/floor01.jpg");
-    wallTex = new Texture("../data/textures/small_brick1.bmp");
-    medKitTex = new Texture("../data/textures/barrelCol.png");
     gunTex = new Texture("../data/textures/simpGun_diffuse.png");
 
 
     //medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
     medKitPos = vec3(0.0f, 2.5186f, 0.0f);
     medKitTranslate.translate(medKitPos);
-
-
-    //gunModel = glm::rotate(camPosition, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0));
-    //printf("%f %f %f", matrix.e03, matrix.e13, matrix.e23);
-
-
-
-
-
     
     return true;
 }
@@ -133,30 +107,11 @@ void Game::render() {
     glViewport(0, 0, mWidth, mHeight);
 
     renderer->currentShader->bind();
-    //wallTex->bind(0);
-    //mat4 m;
-    //renderer->setModelMatrix(&m);
-    //renderer->batch[0]->draw_mesh();
-    //renderer->batch[2]->draw_mesh();
-    //floorTex->bind(0);
-    //renderer->batch[1]->draw_mesh();
-
-
-    //renderer->setModelMatrix(&medKitTranslate);
-    //medKitTex->bind(0);
-    //if (!visible)
-    //{
-	//glBindVertexArray(0);
-    //}
-    //else
-    //{
-	//renderer->batch[3]->draw_mesh();
-    //}
     entities[0]->obj.diffuseMap->bind(0);
     renderer->setModelMatrix(&entities[0]->obj.matrix);
-    renderer->batch[5]->draw_mesh();
+    renderer->batch[1]->draw_mesh();
     renderer->setModelMatrix(&entities[1]->obj.matrix);
-    renderer->batch[6]->draw_mesh();
+    renderer->batch[2]->draw_mesh();
     
     mat4 invModelview;
 
@@ -179,16 +134,11 @@ void Game::render() {
     tr.rotateY(DEG2RAD*(10.0f));
     tr.translate(vec3(3.0f, -2.0f, -2.0f));
 
-
-
     mat4 gunMV = invModelview * tr;
     renderer->setModelMatrix(&gunMV);
     gunTex->bind(0);
     glClear(GL_DEPTH_BUFFER_BIT); // clear depth in order to weapon don't embedded in texture
-    renderer->batch[4]->draw_mesh();
-
-
-
+    renderer->batch[0]->draw_mesh();
 
 
     ui->begin(camera->aspect);
