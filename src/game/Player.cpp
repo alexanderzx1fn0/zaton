@@ -160,14 +160,11 @@ void Player::update() {
         tempView.rotateZ(rot.z);
         vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
 
-        mat4 mInv = medKitTranslate.inverseOrtho();
-        vec3 rayPosLocal = mInv * vec4(ro, 1.0);
-        vec3 rayDirLocal = mInv * vec4(rd, 0.0);
 
 
         // step 2: find ray sphere intersection
         float t = 0;
-        if (intersect(ro, rd, Sphere(vec3(medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23), .2f), t))
+        if (intersect(ro, rd, Sphere(vec3(entities[0]->obj.matrix.e03, entities[0]->obj.matrix.e13, entities[0]->obj.matrix.e23), 1.f), t))
         {
             printf("Hit %f\n", t);
             visible = false;
@@ -187,7 +184,7 @@ void Player::update() {
 	}
 
 	//printf("Position of the player: %f %f %f\n", pos.x, pos.y, pos.z);
-	//printf("MedKitPos of the player: %f %f %f\n", medKitTranslate.e03, medKitTranslate.e13, medKitTranslate.e23);
+	//printf("MedKitPos of the player: %f %f %f\n", entities[0]->obj.matrix.e03, entities[0]->obj.matrix.e13, entities[0]->obj.matrix.e23);
 
         //weapon->fire(pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f), rot, (input & FIRE_A));
 }
