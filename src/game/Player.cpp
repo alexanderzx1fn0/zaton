@@ -73,8 +73,8 @@ void Player::respawn() {
     //pos = vec3(m.e03, m.e13, m.e23); // extract from model matrix position part
 
     //rot = vec3(0.0f, atan2f(m.e02, -m.e22), 0.0f);
-    pos = vec3(0.0f, 0.0f, 1.0f);
-    rot = vec3(0.0, 0.0f, 0.0f);
+    pos = vec3(0.0f, 1.0f, 1.0f);
+    rot = vec3(0.0f, 0.0f, 0.0f);
 
     health = 100;
     velocity = vec3(0.0f);
