@@ -130,9 +130,9 @@ void AABB::computeAABB(Entity* entity)
         vec3 center = vec3( (max.x + min.x) * .5, (max.y + min.y) * .5, (max.z + min.z) * .5);
 
         transform.identity();
-        transform = transform * entity->obj.matrix;
-        transform.scale(size);
         transform.translate(center);
+        transform.scale(size);
+        transform = entity->obj.matrix * transform; // apply transformation
 /*
             printf("MIN: %f %f %f\n", min.x, min.y, min.z);
             printf("MAX: %f %f %f\n", max.x, max.y, max.z);

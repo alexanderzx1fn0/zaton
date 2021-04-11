@@ -73,7 +73,7 @@ bool Game::initGame()
 
     // create aabb for each entities
     aabb = new AABB;
-    aabb->computeAABB(entities[0]);
+    aabb->computeAABB(entities[1]);
     aabb->generateBox();
 
     
