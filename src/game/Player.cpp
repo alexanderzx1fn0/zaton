@@ -165,33 +165,6 @@ void Player::update() {
         tempView.rotateZ(rot.z);
         vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
 
-	float t = 0.0f;
-	    trace(ro, rd, t);
-	if (input & FIRE_A)
-	{
-	    //printf("ro: %f %f %f, rd: %f %f %f\n", ro.x, ro.y, ro.z, rd.x, rd.y, rd.z);
-	    // step 2: find ray sphere intersection
-	    /*
-	    if (intersect(ro, rd, Sphere(vec3(entities[0]->obj.matrix.e03,
-					      entities[0]->obj.matrix.e13,
-					      entities[0]->obj.matrix.e23), 4.f), t))
-	    */
-
-	    if (t > 0.0f)
-	    {
-		lineUpdate = true;
-		printf("Hit %f\n", t);
-		roLine = vec3(ro);
-		rdLine = vec3(rd);
-		lineDistance = t;
-	    }
-	    else
-	    {
-
-		lineUpdate = false;
-	    }
-	}
-
 
 
 
@@ -216,92 +189,41 @@ void Player::update() {
 }
 
 void Player::collide() {
-        for (int i = 0; i < entities[1]->obj.nIndices; i+=3)
+    for (int j = 0; j < entityCount; j++) {
+        for (int i = 0; i < entities[j]->obj.nIndices; i += 3)
         {
-            vec3 a = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 0] * 3+2]);
-            vec3 b = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 1] * 3+2]);
-            vec3 c = vec3(entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3 + 0], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3 + 1], entities[1]->obj.f_vertices[entities[1]->obj.indices[i + 2] * 3+2]);
-
-	vec3 n;
-	float t;
-
-	if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
-	    (c.x == b.x && c.y == b.y && c.z == b.z) ||
-	    (a.x == c.x && a.y == c.y && a.z == c.z)) {
-	    continue;
-	}
-
-	if (Sphere(pos + vec3(0.0f, PLAYER_RADIUS, 0.0f), PLAYER_RADIUS).intersect(Triangle(a, b, c), n, t) && t != 0.0f) {
-	    if (fabsf(n.y) > fabsf(n.x) && fabsf(n.y) > fabsf(n.z)) {
-		onGround = true;
-	    }
+            vec3& a = entities[j]->obj.f_vertices[entities[j]->obj.indices[i + 0]].p;
+            vec3& b = entities[j]->obj.f_vertices[entities[j]->obj.indices[i + 1]].p;
+            vec3& c = entities[j]->obj.f_vertices[entities[j]->obj.indices[i + 2]].p;
 
 
-	    if (fabsf(n.y) < 0.1 && t > 0.0f)
-	    {
-		//velocity = velocity - n * velocity.dot(n);
-	    }
+            vec3 n;
+            float t;
 
-	    pos = pos + n * t;
-	}
-    }
-}
+            if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
+                (c.x == b.x && c.y == b.y && c.z == b.z) ||
+                (a.x == c.x && a.y == c.y && a.z == c.z)) {
+                continue;
+            }
 
-void Player::collideT() {
-    for (int i = 0; i < WallIndicesCount; i += 3) {
-
-	vec3 a = vec3(WallPositions[WallIndices[i + 0] * 3 + 0], WallPositions[WallIndices[i + 0] * 3 + 1], WallPositions[WallIndices[i + 0] * 3+2]);
-	vec3 b = vec3(WallPositions[WallIndices[i + 1] * 3 + 0], WallPositions[WallIndices[i + 1] * 3 + 1], WallPositions[WallIndices[i + 1] * 3+2]);
-	vec3 c = vec3(WallPositions[WallIndices[i + 2] * 3 + 0], WallPositions[WallIndices[i + 2] * 3 + 1], WallPositions[WallIndices[i + 2] * 3+2]);
-
-	vec3 n;
-	float t;
-
-	if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
-	    (c.x == b.x && c.y == b.y && c.z == b.z) ||
-	    (a.x == c.x && a.y == c.y && a.z == c.z)) {
-	    continue;
-	}
-
-	if (Sphere(pos + vec3(0.0f, PLAYER_RADIUS, 0.0f), PLAYER_RADIUS).intersect(Triangle(a, b, c), n, t) && t != 0.0f) {
-	    if (fabsf(n.y) > fabsf(n.x) && fabsf(n.y) > fabsf(n.z)) {
-		onGround = true;
-	    }
+            if (Sphere(pos + vec3(0.0f, PLAYER_RADIUS, 0.0f), PLAYER_RADIUS).intersect(Triangle(a, b, c), n, t) && t != 0.0f)
+            {
+                if (fabsf(n.y) > fabsf(n.x) && fabsf(n.y) > fabsf(n.z)) {
+                    onGround = true;
+                }
 
 
-	    if (fabsf(n.y) < 0.1 && t > 0.0f)
-	    {
-		velocity = velocity - n * velocity.dot(n);
-	    }
+                if (fabsf(n.y) < 0.1 && t > 0.0f)
+                {
+                    velocity = velocity - n * velocity.dot(n);
+                }
 
-	    pos = pos + n * t;
-	}
+                pos = pos + n * t;
+            }
+        }
     }
 }
 
 void Player::trace(const vec3 &rayPos, const vec3 &rayDir, float &t) {
 
-    mat4 mInv = entities[0]->obj.matrix.inverseOrtho();
-    vec3 rayPosLocal = mInv * vec4(rayPos, 1.0);
-    vec3 rayDirLocal = mInv * vec4(rayDir, 0.0);
-
-	for (int i = 0; i < entities[0]->obj.nIndices; i += 3) {
-	    vec3 &a = entities[0]->obj.vertices[entities[0]->obj.indices[i + 0]].coord;
-	    vec3 &b = entities[0]->obj.vertices[entities[0]->obj.indices[i + 1]].coord;
-	    vec3 &c = entities[0]->obj.vertices[entities[0]->obj.indices[i + 2]].coord;
-
-	    if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
-		(c.x == b.x && c.y == b.y && c.z == b.z) ||
-		(a.x == c.x && a.y == c.y && a.z == c.z)) {
-		continue;
-	    }
-
-	    float u, v;
-	    float t0;
-	    if (Triangle(a, b, c).intersect(rayPosLocal, rayDirLocal, false, u, v, t0) && t0 < t)
-	    {
-		t = t0;
-		printf("Done\n");
-	    }
-	}
 }

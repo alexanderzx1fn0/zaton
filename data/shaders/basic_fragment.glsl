@@ -13,10 +13,10 @@ uniform bool colorLine;
 void main()
 {
     if (colorLine) {
-	fragColor = vec4(vec3(1.0f, 0.0, 0.0), 1.0f);
+	    fragColor = vec4(vec3(1.0f, 0.0, 0.0), 1.0f);
     }
     else {
-	fragColor = texture(uDiffuse, uv.xy);
+	    fragColor = vec4(vec3(1.0), 1.0);
     }
     //fragColor = vec4(normalize(n), 1.0);
 }

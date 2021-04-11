@@ -6,7 +6,7 @@
 
 bool LoadCollidableGeometry()
 {
-    Stream stream("../data/environment.lvl");
+    Stream stream("../data/env.lvl");
     while (stream.pos < stream.size)
     {
         entity =(entities[entityCount++] = new Entity());
@@ -21,8 +21,9 @@ bool LoadCollidableGeometry()
         stream.read(entity->obj.indices, entity->obj.nIndices * sizeof(unsigned int));
 
         stream.read(&entity->obj.nVertices, sizeof(entity->obj.nVertices));
-        entity->obj.f_vertices = new float[entity->obj.nVertices * 3]; // Each vertex has three floats (x, y, z)
-        stream.read(entity->obj.f_vertices, entity->obj.nVertices * sizeof(float) * 3);
+        entity->obj.f_vertices = new simpleVertex[entity->obj.nVertices]; // Each vertex has three floats (x, y, z)
+        stream.read(entity->obj.f_vertices, entity->obj.nVertices * sizeof(simpleVertex));
+
     }
     return true;
 }

@@ -29,7 +29,7 @@ Mesh::Mesh(const Vertex* vertices, int nVertices, const unsigned int* indices, i
 
 }
 
-Mesh::Mesh(const float* vertices, int nVertices,
+Mesh::Mesh(const simpleVertex* vertices, int nVertices,
 	const unsigned int* indices, int nIndices)
 {
 
@@ -40,7 +40,7 @@ Mesh::Mesh(const float* vertices, int nVertices,
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(float) * 3, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(simpleVertex), vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); // position
     glEnableVertexAttribArray( 0 );
 

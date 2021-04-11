@@ -60,7 +60,7 @@ bool Game::initGame()
 {
 
     
-    LoadLevel();
+    //LoadLevel();
     LoadCollidableGeometry();
     printf("Load done\n");
     /*
@@ -69,7 +69,7 @@ bool Game::initGame()
         printf("Texcoords: %f %f\n", vertices[i].texcoord.x, vertices[i].texcoord.y);
     }
     */
-
+    printf("%d\n", entityCount);
 
         
     ui = new UI(mWidth, mHeight);
@@ -81,19 +81,27 @@ bool Game::initGame()
     camera->freeCam = false;
 
 
-    renderer->drawIndexed(GunPositions, GunVertices,
-			    GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
 
 
+/*
     renderer->drawIndexedModel(entities[0]->obj.vertices,
                               entities[0]->obj.nVertices,
                               entities[0]->obj.indices,
                               entities[0]->obj.nIndices);
+*/
 
-    renderer->drawIndexedTest(entities[1]->obj.f_vertices,
-                              entities[1]->obj.nVertices,
-                              entities[1]->obj.indices,
-                              entities[1]->obj.nIndices);
+    for (int i = 0; i < entityCount; i++)
+    {
+        renderer->drawIndexedTest(entities[i]->obj.f_vertices,
+            entities[i]->obj.nVertices,
+            entities[i]->obj.indices,
+            entities[i]->obj.nIndices);
+    }
+
+
+    renderer->drawIndexed(GunPositions, GunVertices,
+        GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
+
 
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
@@ -131,11 +139,15 @@ void Game::render() {
 
 
     renderer->currentShader->bind();
-    entities[0]->obj.diffuseMap->bind(0);
-    renderer->setModelMatrix(&entities[0]->obj.matrix);
-    renderer->batch[1]->draw_mesh();
-    renderer->setModelMatrix(&entities[1]->obj.matrix);
-    renderer->batch[2]->draw_mesh();
+
+    
+    for (int i = 0; i < entityCount; i++)
+    {
+        renderer->setModelMatrix(&entities[i]->obj.matrix);
+        renderer->batch[i]->draw_mesh();
+    }
+
+
 
     renderer->setUniform1i("colorLine", 0);
     if (lineUpdate)
@@ -171,7 +183,7 @@ void Game::render() {
     renderer->setModelMatrix(&gunMV);
     gunTex->bind(0);
     glClear(GL_DEPTH_BUFFER_BIT); // clear depth in order to weapon don't embedded in texture
-    renderer->batch[0]->draw_mesh();
+    renderer->batch[5]->draw_mesh();
 
 
     ui->begin(camera->aspect);

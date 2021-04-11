@@ -4,6 +4,11 @@
 #include "Shader.h"
 #include "util/utils.h"
 
+struct simpleVertex
+{
+    vec3 p;
+};
+
 struct Vertex
 {
     vec3 coord;
@@ -19,8 +24,7 @@ public:
     virtual void drawIndexed(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord) = 0;
 
-    virtual void drawIndexedTest(const float* vertices, int nVertices,
-	const unsigned int* indices, int nIndices) = 0;
+    virtual void drawIndexedTest(const simpleVertex* vertices, int nVertices, const unsigned int* indices, int nIndices) = 0;
 
     virtual void drawIndexedModel(const Vertex* vertices, int nVertices,
         const unsigned int* indices, int nIndices) = 0;

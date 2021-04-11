@@ -23,7 +23,7 @@ void OpenGLRenderer::drawIndexed(const float* vertices, int nVertices,
 	batch[OpenGLRenderer::nMeshes++] = new Mesh(vertices, nVertices, indices, nIndices, customNormals, texcoord);
 }
 
-void OpenGLRenderer::drawIndexedTest(const float* vertices, int nVertices, const unsigned int* indices, int nIndices)
+void OpenGLRenderer::drawIndexedTest(const simpleVertex* vertices, int nVertices, const unsigned int* indices, int nIndices)
 {
 
     batch[OpenGLRenderer::nMeshes++] = new Mesh(vertices, nVertices, indices, nIndices);

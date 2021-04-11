@@ -70,7 +70,6 @@ public:
 
     void update();
     void collide();
-    void collideT();
     void trace(const vec3 &rayPos, const vec3 &rayDir, float &t);
 };
 

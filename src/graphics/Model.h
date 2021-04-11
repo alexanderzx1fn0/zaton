@@ -44,7 +44,7 @@ struct Model
     int   nVertices;
     unsigned int   *indices;
     Vertex  *vertices;
-    float* f_vertices;
+    simpleVertex* f_vertices;
 
 };
 

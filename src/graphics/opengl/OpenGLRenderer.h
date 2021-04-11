@@ -13,8 +13,7 @@ public:
     void drawIndexed(const float* vertices, int nVertices,
 	const unsigned int* indices, int nIndices, const float* customNormals, const float* texcoord);
 
-    void drawIndexedTest(const float* vertices, int nVertices,
-	const unsigned int* indices, int nIndices);
+    void drawIndexedTest(const simpleVertex* vertices, int nVertices, const unsigned int* indices, int nIndices);
 
     void drawIndexedModel(const Vertex* vertices, int nVertices,
         const unsigned int* indices, int nIndices);
@@ -29,7 +28,7 @@ public:
     void changeShader(Shader* shader);
 
     Mesh* mesh;
-    Mesh* batch[10];// TODO: actually it should be arbitrary size array
+    Mesh* batch[32];// TODO: actually it should be arbitrary size array
     static int nMeshes;
 };
 
