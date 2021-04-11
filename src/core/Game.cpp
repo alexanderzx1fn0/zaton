@@ -71,8 +71,9 @@ bool Game::initGame()
     LoadCollidableGeometry("../data/env.lvl");
 
 
+    // create aabb for each entities
     aabb = new AABB;
-    aabb->computeAABB(entities[1]);
+    aabb->computeAABB(entities[0]);
     aabb->generateBox();
 
     

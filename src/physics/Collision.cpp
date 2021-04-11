@@ -31,49 +31,58 @@ void AABB::setUniform(const mat4* matViewProj)
 
 void AABB::generateBox()
 {
-    static const vec3 kCubeVertices[] =
-    {
-        vec3(  1.0f,  1.0f, -1.0f ), /* 0 */
-        vec3( -1.0f,  1.0f, -1.0f ), /* 1 */
-        vec3( -1.0f, -1.0f, -1.0f ), /* 2 */
-        vec3( 1.0f, -1.0f, -1.0f ), /* 3 */
-        vec3(  1.0f,  1.0f,  1.0f ), /* 4 */
-        vec3( -1.0f,  1.0f,  1.0f ), /* 5 */
-        vec3( -1.0f, -1.0f,  1.0f ), /* 6 */
-        vec3(  1.0f, -1.0f,  1.0f ), /* 7 */
-    };
-
-    static const unsigned int kCubeIndices[] =
-    {
-        0, 2, 1,   0, 3, 2,  /* front */
-        4, 3, 0,   4, 7, 3,  /* right */
-        4, 1, 5,   4, 0, 1,  /* top */
-        1, 6, 5,   1, 2, 6,  /* left */
-        3, 6, 2,   3, 7, 6,  /* bottom */
-        5, 7, 4,   5, 6, 7,  /* back */
-    };
-
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
+  // Cube 1x1x1, centered on origin
+GLfloat vertices[] = {
+-0.5, -0.5, -0.5, 1.0,
+ 0.5, -0.5, -0.5, 1.0,
+ 0.5,  0.5, -0.5, 1.0,
+-0.5,  0.5, -0.5, 1.0,
+-0.5, -0.5,  0.5, 1.0,
+ 0.5, -0.5,  0.5, 1.0,
+ 0.5,  0.5,  0.5, 1.0,
+-0.5,  0.5,  0.5, 1.0,
+};
+glGenBuffers(1, &vbo);
+glBindBuffer(GL_ARRAY_BUFFER, vbo);
+glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  glEnableVertexAttribArray(0);
+  glVertexAttribPointer(
+    0,  // attribute
+    4,                  // number of elements per vertex, here (x,y,z,w)
+    GL_FLOAT,           // the type of each element
+    GL_FALSE,           // take our values as-is
+    0,                  // no extra data between each position
+    0                   // offset of first element
+  );
 
-    glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float) * 3, kCubeVertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); // position
-    glEnableVertexAttribArray( 0 );
 
-    glGenBuffers(1, &ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int), kCubeIndices, GL_STATIC_DRAW);
+GLushort elements[] = {
+0, 1, 2, 3,
+4, 5, 6, 7,
+0, 4, 1, 5, 2, 6, 3, 7
+};
+glGenBuffers(1, &ebo);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+
 
     glBindVertexArray(0);
 }
 
 void AABB::draw()
 {
+/*
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(0);
+*/
+    glBindVertexArray(vao);
+    glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, (GLvoid*)(4*sizeof(GLushort)));
+    glDrawElements(GL_LINES, 8, GL_UNSIGNED_SHORT, (GLvoid*)(8*sizeof(GLushort)));
     glBindVertexArray(0);
 }
 
