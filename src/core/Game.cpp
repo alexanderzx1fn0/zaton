@@ -101,10 +101,6 @@ bool Game::initGame()
     }
 
 
-    renderer->drawIndexed(GunPositions, GunVertices,
-        GunIndices, GunIndicesCount, GunNormals, GunTexcoords);
-
-
     renderer->addShader("../data/shaders/basic_vertex.glsl",
 			"../data/shaders/basic_fragment.glsl");
     

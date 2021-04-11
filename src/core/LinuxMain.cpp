@@ -23,8 +23,8 @@ int   lastTime;
 float deltaTime;
 
 Game* game;
-const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 720;
+const int WINDOW_WIDTH = 1920;
+const int WINDOW_HEIGHT = 1080;
 
 
 static struct timespec a__time_start = {0, 0};

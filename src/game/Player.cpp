@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "input/Input.h"
 #include "util/utils.h"
-#include "scene/level2.h"
 
 #include "Weapon.h"
 #include "Entity.h"
