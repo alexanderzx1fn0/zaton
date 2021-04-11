@@ -33,6 +33,9 @@ mat4 medKitTranslate;
 bool visible = true;
 mat4 gunModel;
 
+mat4 invModelview;
+mat4 normalMatrix;
+
 Line line;
  vec3 roLine;
  vec3 rdLine;
@@ -115,6 +118,17 @@ bool Game::initGame()
 
     line.create();
 
+
+    // light info
+    vec3 lightPos(4.0, 1.0, 5.0f);
+    vec3 lightColor(1.0f);
+    vec3 lightIntensity(1.0f);
+    vec3 globalColor(.3f);
+    renderer->setVec3(&lightPos, "lights[0].Position");
+    renderer->setVec3(&lightColor, "lights[0].LightColor");
+    renderer->setVec3(&lightIntensity, "lights[0].Intensity");
+    renderer->setVec3(&globalColor, "Color");
+    renderer->setFloat(32.0f, "Shininess");
     
     return true;
 }
@@ -157,12 +171,17 @@ void Game::render() {
     renderer->setUniform1i("colorLine", 0);
 
     
-    mat4 invModelview;
 
+
+    invModelview.identity();
     invModelview.translate(player->pos + vec3(0.0, PLAYER_HEIGHT, 0.0));
     invModelview.rotateY(player->rot.y);
     invModelview.rotateX(player->rot.x);
     invModelview.rotateZ(player->rot.z);
+
+    normalMatrix.identity();
+    normalMatrix = mat4_transpose(invModelview);
+    
 
     //mat4 e = invModelview * camera->mView;
     /*
@@ -201,6 +220,8 @@ void Game::updateTick()
     camera->update();
     renderer->currentShader->bind();
     renderer->setViewProjMatrix(&camera->mViewProj);
+    renderer->setNormalMatrix(&normalMatrix);
+    renderer->setVec3(&camera->pos, "eyePosition");
 
 }
 

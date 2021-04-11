@@ -48,6 +48,9 @@ PFNGLUNIFORM4FVPROC                 glUniform4fv = NULL;
 PFNGLGETUNIFORMLOCATIONPROC         glGetUniformLocation = NULL;
 PFNGLUNIFORMMATRIX4FVPROC           glUniformMatrix4fv = NULL;
 PFNGLUNIFORM1IPROC		    glUniform1i = NULL;
+PFNGLUNIFORM3FVPROC                 glUniform3fv = NULL;
+PFNGLUNIFORM1FPROC                  glUniform1f = NULL;
+
 PFNGLDELETEPROGRAMPROC              glDeleteProgram = NULL;
 PFNGLGENERATEMIPMAPPROC glGenerateMipmap = NULL;
 
@@ -96,6 +99,8 @@ void init_opengl_extensions() {
         GetProcGL(glGenerateMipmap);
 	GetProcGL(glUniform1i);
 	GetProcGL(glBufferSubData);
+        GetProcGL(glUniform3fv);
+        GetProcGL(glUniform1f);
 #if defined(_WIN32)
 	GetProcGL(glActiveTexture);
 #endif

@@ -58,6 +58,21 @@ void OpenGLRenderer::setViewProjMatrix(const mat4* matViewProj)
 
 }
 
+void OpenGLRenderer::setNormalMatrix(const mat4* nrmMatrix)
+{
+    glUniformMatrix4fv(currentShader->getUniform("uNormalMatrix"), 1, GL_FALSE, (float*)nrmMatrix);
+}
+
+void OpenGLRenderer::setVec3(const vec3* v, const char* src)
+{
+    glUniform3fv(currentShader->getUniform(src), 1, (float*)v);
+}
+
+void OpenGLRenderer::setFloat(const float f, const char* src)
+{
+    glUniform1f(currentShader->getUniform(src), f);
+}
+
 void OpenGLRenderer::setUniform1i(const char* str, int v)
 {
     glUniform1i(currentShader->getUniform(str), v);

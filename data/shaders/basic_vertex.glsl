@@ -13,13 +13,17 @@ layout(location = 2 ) in vec2 texcoord;
 uniform mat4 uViewProjM;
 uniform mat4 modelView;
 uniform mat4 uModelM;
+uniform mat4 uNormalMatrix;
+
 
 out vec2 uv;
 out vec3 n;
+out vec3 p;
 
 void main()
 {
-    n = normal;
+    p = vec3(uModelM * vec4(position, 1.0));
+    n = normalize(vec3(uNormalMatrix * vec4(normal, 0.0f)));
     uv = texcoord;
     gl_Position = uViewProjM * uModelM * vec4(position, 1.0f);
 }

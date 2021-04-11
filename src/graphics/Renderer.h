@@ -41,6 +41,10 @@ public:
     virtual void setViewMatrix(const mat4* matView) = 0;
     virtual void setModelMatrix(const mat4* matModel) = 0;
     virtual void setViewProjMatrix(const mat4* matViewProj) = 0;
+    virtual void setNormalMatrix(const mat4* nrmMatrix) = 0;
+
+    virtual void setVec3(const vec3* v, const char* src) = 0;
+    virtual void setFloat(const float f, const char* src) = 0;
 
     // TODO: how to create shader you can see in ##ingredients
     virtual void addShader(const char* path1, const char *path2) = 0;
