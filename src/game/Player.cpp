@@ -11,6 +11,11 @@ extern mat4 medKitTranslate;
 extern vec3 medKitPos;
 extern bool visible;
 
+extern vec3 roLine;
+extern vec3 rdLine;
+extern bool lineUpdate;
+extern float lineDistance;
+
 void swap(float& a, float& b)
 {
     float temp;
@@ -160,15 +165,36 @@ void Player::update() {
         tempView.rotateZ(rot.z);
         vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
 
+	float t = 0.0f;
+	    trace(ro, rd, t);
+	if (input & FIRE_A)
+	{
+	    //printf("ro: %f %f %f, rd: %f %f %f\n", ro.x, ro.y, ro.z, rd.x, rd.y, rd.z);
+	    // step 2: find ray sphere intersection
+	    /*
+	    if (intersect(ro, rd, Sphere(vec3(entities[0]->obj.matrix.e03,
+					      entities[0]->obj.matrix.e13,
+					      entities[0]->obj.matrix.e23), 4.f), t))
+	    */
+
+	    if (t > 0.0f)
+	    {
+		lineUpdate = true;
+		printf("Hit %f\n", t);
+		roLine = vec3(ro);
+		rdLine = vec3(rd);
+		lineDistance = t;
+	    }
+	    else
+	    {
+
+		lineUpdate = false;
+	    }
+	}
 
 
-        // step 2: find ray sphere intersection
-        float t = 0;
-        if (intersect(ro, rd, Sphere(vec3(entities[0]->obj.matrix.e03, entities[0]->obj.matrix.e13, entities[0]->obj.matrix.e23), 1.f), t))
-        {
-            printf("Hit %f\n", t);
-            visible = false;
-        }
+
+
 
 
 
@@ -251,4 +277,31 @@ void Player::collideT() {
 	    pos = pos + n * t;
 	}
     }
+}
+
+void Player::trace(const vec3 &rayPos, const vec3 &rayDir, float &t) {
+
+    mat4 mInv = entities[0]->obj.matrix.inverseOrtho();
+    vec3 rayPosLocal = mInv * vec4(rayPos, 1.0);
+    vec3 rayDirLocal = mInv * vec4(rayDir, 0.0);
+
+	for (int i = 0; i < entities[0]->obj.nIndices; i += 3) {
+	    vec3 &a = entities[0]->obj.vertices[entities[0]->obj.indices[i + 0]].coord;
+	    vec3 &b = entities[0]->obj.vertices[entities[0]->obj.indices[i + 1]].coord;
+	    vec3 &c = entities[0]->obj.vertices[entities[0]->obj.indices[i + 2]].coord;
+
+	    if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
+		(c.x == b.x && c.y == b.y && c.z == b.z) ||
+		(a.x == c.x && a.y == c.y && a.z == c.z)) {
+		continue;
+	    }
+
+	    float u, v;
+	    float t0;
+	    if (Triangle(a, b, c).intersect(rayPosLocal, rayDirLocal, false, u, v, t0) && t0 < t)
+	    {
+		t = t0;
+		printf("Done\n");
+	    }
+	}
 }

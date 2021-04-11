@@ -41,6 +41,8 @@ ${PLATFORM_SOURCES}
 "src/graphics/Sprite.h"
 "src/graphics/Sprite.cpp"
 "src/graphics/Model.h"
+"src/graphics/DrawDebug.h"
+"src/graphics/DrawDebug.cpp"
 
 
 "src/input/Input.h"

@@ -29,6 +29,7 @@ PFNGLACTIVETEXTUREPROC  glActiveTexture = NULL;
 
 PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers = NULL;
 PFNGLGENBUFFERSPROC     glGenBuffers = NULL;
+PFNGLBUFFERSUBDATAPROC glBufferSubData = NULL;
 
 PFNGLCREATEPROGRAMPROC              glCreateProgram = NULL;
 PFNGLCREATESHADERPROC               glCreateShader = NULL;
@@ -94,6 +95,7 @@ void init_opengl_extensions() {
         GetProcGL(glDeleteProgram);
         GetProcGL(glGenerateMipmap);
 	GetProcGL(glUniform1i);
+	GetProcGL(glBufferSubData);
 #if defined(_WIN32)
 	GetProcGL(glActiveTexture);
 #endif

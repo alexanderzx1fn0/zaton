@@ -19,11 +19,9 @@ extern PFNGLACTIVETEXTUREPROC  glActiveTexture;
 #include <GL/glx.h>
 
 #endif
-
-
-
 extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 extern PFNGLGENBUFFERSPROC     glGenBuffers;
+extern PFNGLBUFFERSUBDATAPROC glBufferSubData;
 
 extern PFNGLCREATEPROGRAMPROC              glCreateProgram;
 extern PFNGLCREATESHADERPROC               glCreateShader;

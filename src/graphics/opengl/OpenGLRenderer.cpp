@@ -58,6 +58,12 @@ void OpenGLRenderer::setViewProjMatrix(const mat4* matViewProj)
 
 }
 
+void OpenGLRenderer::setUniform1i(const char* str, int v)
+{
+    glUniform1i(currentShader->getUniform(str), v);
+
+}
+
 void OpenGLRenderer::addShader(const char* path1, const char *path2)
 {
     currentShader = new Shader(path1, path2);

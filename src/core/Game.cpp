@@ -4,11 +4,16 @@
 #include "util/utils.h"
 
 
-#include "scene/Cube.h"
+
 
 #include "graphics/opengl/OpenGLRenderer.h"
 #include "graphics/Shader.h"
 #include "graphics/Texture.h"
+#include "graphics/DrawDebug.h"
+
+
+
+#include "scene/Cube.h"
 #include "scene/LoadLevel.h"
 
 #include "game/Camera.h"
@@ -27,6 +32,12 @@ vec3 medKitPos;
 mat4 medKitTranslate;
 bool visible = true;
 mat4 gunModel;
+
+Line line;
+ vec3 roLine;
+ vec3 rdLine;
+bool lineUpdate = false;
+float lineDistance = 0.0f;
 
 Game::Game(int width, int height) : mWidth(width), mHeight(height)
 {}
@@ -94,6 +105,9 @@ bool Game::initGame()
     //medKitPos = vec3(3.7472f, -6.5186f, -0.4521f);
     medKitPos = vec3(0.0f, 2.5186f, 0.0f);
     medKitTranslate.translate(medKitPos);
+
+    line.create();
+
     
     return true;
 }
@@ -106,12 +120,31 @@ void Game::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, mWidth, mHeight);
 
+/*
+	glLineWidth(2.f);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_LINE_SMOOTH);
+*/
+
+
+
     renderer->currentShader->bind();
     entities[0]->obj.diffuseMap->bind(0);
     renderer->setModelMatrix(&entities[0]->obj.matrix);
     renderer->batch[1]->draw_mesh();
     renderer->setModelMatrix(&entities[1]->obj.matrix);
     renderer->batch[2]->draw_mesh();
+
+    renderer->setUniform1i("colorLine", 0);
+    if (lineUpdate)
+    {
+	renderer->setUniform1i("colorLine", 1);
+	line.draw(roLine, rdLine, lineDistance);
+    }
+    renderer->setUniform1i("colorLine", 0);
+
     
     mat4 invModelview;
 

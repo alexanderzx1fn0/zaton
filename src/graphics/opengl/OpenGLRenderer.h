@@ -23,6 +23,7 @@ public:
     void setViewMatrix(const mat4* matView);
     void setModelMatrix(const mat4* matModel);
     void setViewProjMatrix(const mat4* matViewProj);
+    void setUniform1i(const char* str, int v);
     
     void addShader(const char* path1, const char *path2);
     void changeShader(Shader* shader);
