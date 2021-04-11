@@ -6,6 +6,8 @@ AABB::AABB()
 {
     program = new Shader("../data/shaders/aabb_vertex.glsl",
 			"../data/shaders/aabb_fragment.glsl");
+    min = vec3(0.0f);
+    max = vec3(0.0f);
 }
 
 AABB::~AABB()
@@ -19,6 +21,17 @@ AABB::~AABB()
     glDeleteBuffers(1, &ebo);
     glBindVertexArray(0);
     glDeleteVertexArrays(1, &vao);
+}
+
+void AABB::recompute()
+{
+    min.x += transform.e03;
+    min.y += transform.e13;
+    min.z += transform.e23;
+
+    max.x += transform.e03;
+    max.y += transform.e13;
+    max.z += transform.e23;
 }
 
 
@@ -88,9 +101,6 @@ void AABB::draw()
 
 void AABB::computeAABB(Entity* entity)
 {
-        vec3 min = vec3(0.0f);
-        vec3 max = vec3(0.0f);
-
         min.x = max.x = entity->obj.f_vertices[entity->obj.indices[0]].p.x;
         min.y = max.y = entity->obj.f_vertices[entity->obj.indices[1]].p.y;
         min.z = max.z = entity->obj.f_vertices[entity->obj.indices[2]].p.z;

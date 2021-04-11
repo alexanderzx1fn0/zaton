@@ -76,6 +76,13 @@ bool Game::initGame()
     aabb->computeAABB(entities[1]);
     aabb->generateBox();
 
+    printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
+    printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
+    printf("Recompute\n");
+    aabb->recompute();
+    printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
+    printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
+
     
     printf("Load done\n");
     /*
@@ -94,16 +101,6 @@ bool Game::initGame()
     player = new Player(Player::PLAYER_1);
     camera->setAspect((float)mWidth / (float)mHeight);
     camera->freeCam = false;
-
-
-
-
-/*
-    renderer->drawIndexedModel(entities[0]->obj.vertices,
-                              entities[0]->obj.nVertices,
-                              entities[0]->obj.indices,
-                              entities[0]->obj.nIndices);
-*/
 
     for (int i = 0; i < entityCount; i++)
     {
@@ -213,8 +210,8 @@ void Game::render() {
     renderer->batch[entityCount-1]->draw_mesh();
 
     
-        aabb->setUniform(&camera->mViewProj);
-        aabb->draw();
+    aabb->setUniform(&camera->mViewProj);
+    aabb->draw();
 
 
     ui->begin(camera->aspect);

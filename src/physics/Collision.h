@@ -10,10 +10,14 @@ public:
     AABB();
     ~AABB();
 
+    vec3 min;
+    vec3 max;
+
     mat4 transform;
     unsigned int vao, vbo, ebo;
 
     void computeAABB(class Entity* entity);
+    void recompute();
     void generateBox();
     void draw();
 
