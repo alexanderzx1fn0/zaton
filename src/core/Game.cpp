@@ -11,6 +11,7 @@
 #include "graphics/Texture.h"
 #include "graphics/DrawDebug.h"
 
+#include "physics/Collision.h"
 
 
 #include "scene/Cube.h"
@@ -36,6 +37,7 @@ mat4 gunModel;
 mat4 invModelview;
 mat4 normalMatrix;
 
+
 Line line;
  vec3 roLine;
  vec3 rdLine;
@@ -48,6 +50,7 @@ Game::Game(int width, int height) : mWidth(width), mHeight(height)
 Game::~Game()
 {
     ClearLevel();
+    delete aabb;
     delete ui;
     delete player;
     delete camera;
@@ -55,6 +58,7 @@ Game::~Game()
     delete gunTex;
 
     delete renderer;
+
 }
 
 
@@ -63,10 +67,14 @@ bool Game::initGame()
 {
 
     
-    //LoadLevel();
     LoadLevel("../data/mesh.geom");
     LoadCollidableGeometry("../data/env.lvl");
-    //LoadLevel("../data/env2.lvl");
+
+
+    aabb = new AABB;
+    aabb->computeAABB(entities[1]);
+    aabb->generateBox();
+
     
     printf("Load done\n");
     /*
@@ -202,6 +210,10 @@ void Game::render() {
     gunTex->bind(0);
     glClear(GL_DEPTH_BUFFER_BIT); // clear depth in order to weapon don't embedded in texture
     renderer->batch[entityCount-1]->draw_mesh();
+
+    
+        aabb->setUniform(&camera->mViewProj);
+        aabb->draw();
 
 
     ui->begin(camera->aspect);

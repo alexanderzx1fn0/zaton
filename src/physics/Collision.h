@@ -1,8 +1,25 @@
-#ifndef PLANE_H_
-#define PLANE_H_
+#ifndef COLLISION_H_
+#define COLLISION_H_
 
 #include "util/utils.h"
 
 //bool intersect(const Ray& r, Entity* entity) const;
+class AABB
+{
+public:
+    AABB();
+    ~AABB();
+
+    mat4 transform;
+    unsigned int vao, vbo, ebo;
+
+    void computeAABB(class Entity* entity);
+    void generateBox();
+    void draw();
+
+    void setUniform(const mat4* matViewProj);
+
+    class Shader* program;
+};
 
 #endif

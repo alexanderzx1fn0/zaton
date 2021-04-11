@@ -29,6 +29,8 @@ public:
     class Texture* medKitTex;
     class Texture* gunTex;
 
+    class AABB* aabb;
+
     class UI *ui;
 
     int mWidth, mHeight;
