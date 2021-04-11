@@ -4,6 +4,13 @@
 #include "Shader.h"
 #include "util/utils.h"
 
+struct texturedVertex
+{
+    vec3 p;
+    vec3 n;
+    vec2 t;
+};
+
 struct simpleVertex
 {
     vec3 p;

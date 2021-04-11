@@ -61,9 +61,10 @@ bool Game::initGame()
 
     
     //LoadLevel();
+    LoadLevel("../data/mesh.geom");
     LoadCollidableGeometry("../data/env.lvl");
     //LoadLevel("../data/env2.lvl");
-    //LoadModel("../data/gun.geom");
+    
     printf("Load done\n");
     /*
     for (int i = 0; i < nVertices; i++)
