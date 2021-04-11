@@ -3,11 +3,11 @@
 
 #include "level2.h"
 #include "simpGun.h"
-
-bool LoadLevel();
+bool LoadLevel(const char* filename);
+bool LoadModel(const char* filename);
 void ClearLevel();
 
-bool LoadCollidableGeometry();
+bool LoadCollidableGeometry(const char* filenam);
 void ClearCollidableGeometry();
 
 #endif

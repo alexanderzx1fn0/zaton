@@ -189,7 +189,7 @@ void Player::update() {
 }
 
 void Player::collide() {
-    for (int j = 0; j < entityCount; j++) {
+    for (int j = 0; j < entityCount-1; j++) {
         for (int i = 0; i < entities[j]->obj.nIndices; i += 3)
         {
             vec3& a = entities[j]->obj.f_vertices[entities[j]->obj.indices[i + 0]].p;

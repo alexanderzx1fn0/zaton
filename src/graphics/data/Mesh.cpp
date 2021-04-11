@@ -41,14 +41,18 @@ Mesh::Mesh(const simpleVertex* vertices, int nVertices,
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
     glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(simpleVertex), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); // position
-    glEnableVertexAttribArray( 0 );
 
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-    float *ptr = 0;
+    float* ptr = 0;
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(simpleVertex), (GLvoid*)(ptr += 0)); // position
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(simpleVertex), (GLvoid*)(ptr += 3)); // normal
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+
+
     glBindVertexArray(0);
 }
 

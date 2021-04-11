@@ -61,7 +61,9 @@ bool Game::initGame()
 
     
     //LoadLevel();
-    LoadCollidableGeometry();
+    LoadCollidableGeometry("../data/env.lvl");
+    //LoadLevel("../data/env2.lvl");
+    //LoadModel("../data/gun.geom");
     printf("Load done\n");
     /*
     for (int i = 0; i < nVertices; i++)
@@ -141,7 +143,7 @@ void Game::render() {
     renderer->currentShader->bind();
 
     
-    for (int i = 0; i < entityCount; i++)
+    for (int i = 0; i < entityCount-1; i++)
     {
         renderer->setModelMatrix(&entities[i]->obj.matrix);
         renderer->batch[i]->draw_mesh();
@@ -177,13 +179,13 @@ void Game::render() {
     mat4 tr;
     tr.scale(.05f);
     tr.rotateY(DEG2RAD*(10.0f));
-    tr.translate(vec3(3.0f, -2.0f, -2.0f));
+    tr.translate(vec3(3.0f, -2.0f, -4.0f));
 
     mat4 gunMV = invModelview * tr;
     renderer->setModelMatrix(&gunMV);
     gunTex->bind(0);
     glClear(GL_DEPTH_BUFFER_BIT); // clear depth in order to weapon don't embedded in texture
-    renderer->batch[5]->draw_mesh();
+    renderer->batch[entityCount-1]->draw_mesh();
 
 
     ui->begin(camera->aspect);

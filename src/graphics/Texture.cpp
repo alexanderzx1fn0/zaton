@@ -25,6 +25,9 @@ Texture::Texture(const char *filename) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     switch( components ) {
+    case 2: {
+        format = GL_RGBA;
+    }
 	case 3: {
 	    // RGB
 	    format = GL_RGB;

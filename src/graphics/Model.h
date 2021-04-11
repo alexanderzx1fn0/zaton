@@ -45,6 +45,7 @@ struct Model
     unsigned int   *indices;
     Vertex  *vertices;
     simpleVertex* f_vertices;
+    int textured;
 
 };
 

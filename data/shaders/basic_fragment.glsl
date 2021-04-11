@@ -16,7 +16,7 @@ void main()
 	    fragColor = vec4(vec3(1.0f, 0.0, 0.0), 1.0f);
     }
     else {
-	    fragColor = vec4(vec3(1.0), 1.0);
+	    fragColor = vec4(normalize(n), 1.0);
     }
     //fragColor = vec4(normalize(n), 1.0);
 }

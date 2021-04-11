@@ -7,6 +7,7 @@
 struct simpleVertex
 {
     vec3 p;
+    vec3 n;
 };
 
 struct Vertex
