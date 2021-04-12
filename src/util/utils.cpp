@@ -1,5 +1,14 @@
 #include "utils.h"
 
+void swap(float& a, float& b)
+{
+    float temp;
+    temp = a;
+    a = b;
+    b = temp;
+    b = a;
+}
+
 mat4 mat4_transpose(const mat4& m)
 {
     return mat4(m.e00, m.e01, m.e02, m.e03,

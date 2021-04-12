@@ -15,14 +15,7 @@ extern vec3 rdLine;
 extern bool lineUpdate;
 extern float lineDistance;
 
-void swap(float& a, float& b)
-{
-    float temp;
-    temp = a;
-    a = b;
-    b = temp;
-    b = a;
-}
+
 
 bool intersect(const vec3& ro, const vec3& rd, const Sphere& s, float& t)
 {
@@ -163,11 +156,6 @@ void Player::update() {
         tempView.rotateX(rot.x);
         tempView.rotateZ(rot.z);
         vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
-
-
-
-
-
 
 
 	//if (SphereSphere(Sphere(pos, .5f), Sphere(medKitPos, 1.f)))

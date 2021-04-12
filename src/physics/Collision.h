@@ -12,9 +12,13 @@ public:
 
     vec3 min;
     vec3 max;
+    vec3 size;
+    vec3 center;
 
     mat4 transform;
     unsigned int vao, vbo, ebo;
+
+    float intersect(const vec3& ro, const vec3& rd);
 
     void computeAABB(class Entity* entity);
     void recompute();

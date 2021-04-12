@@ -8,6 +8,8 @@ AABB::AABB()
 			"../data/shaders/aabb_fragment.glsl");
     min = vec3(0.0f);
     max = vec3(0.0f);
+    size = vec3(0.0f);
+    center = vec3(0.0f);
 }
 
 AABB::~AABB()
@@ -23,6 +25,45 @@ AABB::~AABB()
     glDeleteVertexArrays(1, &vao);
 }
 
+float AABB::intersect(const vec3& ro, const vec3& rd) 
+{ 
+
+    float t1 = (min.x - ro.x) / rd.x;
+    float t2 = (max.x - ro.x) /rd.x;
+    float t3 = (min.y - ro.y) / rd.y;
+    float t4 = (max.y - ro.y) / rd.y;
+    float t5 = (min.z - ro.z) / rd.z;
+    float t6 = (max.z - ro.z) / rd.z;
+
+    float tmin = fmaxf(fmaxf(fminf(t1, t2),
+                             fminf(t3, t4)
+                             ),
+                             fminf(t5, t6)
+                             );
+
+    float tmax = fminf(
+                    fminf(
+                        fmaxf(t1, t2),
+                        fmaxf(t3, t4)
+                    ),
+                    fmaxf(t5, t6)
+                    );
+    if (tmax < 0) {
+        return -1;
+    }
+
+    if (tmin > tmax)
+    {
+        return -1;
+    }
+
+    if (tmin < 0.0f) {
+        return tmax;
+    }
+
+    return tmin;
+}
+
 void AABB::recompute()
 {
     min.x += transform.e03;
@@ -32,6 +73,15 @@ void AABB::recompute()
     max.x += transform.e03;
     max.y += transform.e13;
     max.z += transform.e23;
+/*
+    min.x += transform.e03;
+    min.y += transform.e13;
+    min.z += transform.e23;
+
+    max.x += transform.e03;
+    max.y += transform.e13;
+    max.z += transform.e23;
+*/
 }
 
 
@@ -113,7 +163,7 @@ void AABB::computeAABB(Entity* entity)
 
             if (entity->obj.f_vertices[entity->obj.indices[i]].p.x > max.x) 
             {
-                    min.x = entity->obj.f_vertices[entity->obj.indices[i]].p.x;
+                    max.x = entity->obj.f_vertices[entity->obj.indices[i]].p.x;
             }
 
             if (entity->obj.f_vertices[entity->obj.indices[i]].p.y < min.y) 
@@ -136,13 +186,22 @@ void AABB::computeAABB(Entity* entity)
             }		
         }
 
-        vec3 size = vec3(max.x - min.x, max.y - min.y, max.z - min.z);
-        vec3 center = vec3( (max.x + min.x) * .5, (max.y + min.y) * .5, (max.z + min.z) * .5);
+        size = vec3(max.x - min.x, max.y - min.y, max.z - min.z);
+        center = vec3( (max.x + min.x) * .5, (max.y + min.y) * .5, (max.z + min.z) * .5);
 
         transform.identity();
         transform.translate(center);
         transform.scale(size);
         transform = entity->obj.matrix * transform; // apply transformation
+/*
+        min.x += entity->obj.matrix.e03;
+        min.y += entity->obj.matrix.e13;
+        min.z += entity->obj.matrix.e23;
+
+        max.x += entity->obj.matrix.e03;
+        max.y += entity->obj.matrix.e13;
+        max.z += entity->obj.matrix.e23;
+*/
 /*
             printf("MIN: %f %f %f\n", min.x, min.y, min.z);
             printf("MAX: %f %f %f\n", max.x, max.y, max.z);

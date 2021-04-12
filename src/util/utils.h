@@ -32,10 +32,12 @@ extern float deltaTime;
 
 #define FOURCC(str)   uint32(((uint8*)(str))[0] | (((uint8*)(str))[1] << 8) | (((uint8*)(str))[2] << 16) | (((uint8*)(str))[3] << 24) )
 
-
 int32 clamp(int32 x, int32 a, int32 b);
 
 float clamp(float x, float a, float b);
+
+
+void swap(float& a, float& b);
 
 struct vec2 {
     float x, y;
@@ -185,6 +187,15 @@ struct mat4 {
         r.e23 = -(e03 * e02 + e13 * e12 + e23 * e22); // -dot(pos, dir)
         r.e33 = 1;
         return r;
+    }
+
+    void scale(float x, float y, float z) {
+        mat4 m;
+        m.identity();
+        m.e00 = x;
+        m.e11 = y;
+        m.e22 = z;
+        *this = *this * m;
     }
 
     void scale(const vec3 &offset) {

@@ -233,6 +233,24 @@ void Game::updateTick()
     renderer->setNormalMatrix(&normalMatrix);
     renderer->setVec3(&camera->pos, "eyePosition");
 
+
+    // compute ray origin and ray direction of the ray
+    vec3 ro = player->pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f);
+    mat4 tempView;
+    tempView.identity();
+    tempView.rotateY(player->rot.y);
+    tempView.rotateX(player->rot.x);
+    tempView.rotateZ(player->rot.z);
+    vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
+
+
+
+    //rd = rd * 30.0f;
+    //printf("RO %f %f %f\n", ro.x, ro.y, ro.z);
+    //printf("Rd %f %f %f\n", rd.x, rd.y, rd.z);
+    // maybe i need to map ray to object space
+    printf("%f\n", aabb->intersect(ro, rd));
+
 }
 
 void Game::update()
