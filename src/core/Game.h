@@ -29,7 +29,9 @@ public:
     class Texture* medKitTex;
     class Texture* gunTex;
 
+    // DEBUG THINGS
     class AABB* aabb;
+    class Line* line;
 
     class UI *ui;
 

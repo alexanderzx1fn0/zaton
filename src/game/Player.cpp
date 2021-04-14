@@ -124,7 +124,6 @@ void Player::update() {
         if (input & UP)    fmove = -1.0f;
         if (input & DOWN)  fmove = +1.0f;
 
-        // cудя по всему, тут из матрицы извлекаеи z и x оси
         vec3 dir   = vec3(m.e20, m.e21, m.e22);
         vec3 right = vec3(m.e00, m.e01, m.e02);
 

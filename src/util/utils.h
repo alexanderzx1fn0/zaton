@@ -263,6 +263,14 @@ struct mat4 {
         e22 = (znear + zfar) / (znear - zfar);
         e23 = 2.0f * zfar * znear / (znear - zfar);
     }
+
+    void print()
+    {
+	printf("%f %f %f %f\n", e00, e10, e20, e30);
+	printf("%f %f %f %f\n", e01, e11, e21, e31);
+	printf("%f %f %f %f\n", e02, e12, e22, e32);
+	printf("%f %f %f %f\n", e03, e13, e23, e33);
+    }
 };
 
 float mat3_determinant(const mat3& m);

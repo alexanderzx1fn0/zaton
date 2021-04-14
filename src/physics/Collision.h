@@ -30,4 +30,6 @@ public:
     class Shader* program;
 };
 
+void trace(const vec3 &rayPos, const vec3 &rayDir, float &t);
+
 #endif

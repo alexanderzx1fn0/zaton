@@ -239,3 +239,30 @@ bool intersect(const Ray& r, Entity* entity) const
     return true;
 }
 */
+
+void trace(const vec3 &rayPos, const vec3 &rayDir, float &t) {
+    for (int j = 0; j < entityCount-2; j++) {
+	Entity *entity = entities[j];
+
+	mat4 mInv = entity->obj.matrix.inverseOrtho();
+	vec3 rayPosLocal = mInv * vec4(rayPos, 1.0);
+	vec3 rayDirLocal = mInv * vec4(rayDir, 0.0);
+
+	for (int i = 0; i < entity->obj.nIndices; i += 3) {
+            vec3& a = entity->obj.f_vertices[entity->obj.indices[i + 0]].p;
+            vec3& b = entity->obj.f_vertices[entity->obj.indices[i + 1]].p;
+            vec3& c = entity->obj.f_vertices[entity->obj.indices[i + 2]].p;
+
+	    if ((a.x == b.x && a.y == b.y && a.z == b.z) ||
+		(c.x == b.x && c.y == b.y && c.z == b.z) ||
+		(a.x == c.x && a.y == c.y && a.z == c.z)) {
+		continue;
+	    }
+
+	    float u, v;
+	    float t0;
+	    if (Triangle(a, b, c).intersect(rayPosLocal, rayDirLocal, false, u, v, t0) && t0 < t)
+		t = t0;
+	}
+    }
+}

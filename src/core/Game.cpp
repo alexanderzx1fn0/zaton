@@ -38,9 +38,9 @@ mat4 invModelview;
 mat4 normalMatrix;
 
 
-Line line;
- vec3 roLine;
- vec3 rdLine;
+ vec3 dRO = vec3(0.0f);
+ vec3 dRDIR = vec3(0.0f);
+
 bool lineUpdate = false;
 float lineDistance = 0.0f;
 
@@ -51,6 +51,7 @@ Game::~Game()
 {
     ClearLevel();
     delete aabb;
+    delete line;
     delete ui;
     delete player;
     delete camera;
@@ -71,10 +72,12 @@ bool Game::initGame()
     LoadCollidableGeometry("../data/env.lvl");
 
 
+    line = new Line;
     // create aabb for each entities
     aabb = new AABB;
     aabb->computeAABB(entities[1]);
     aabb->generateBox();
+    //aabb->recompute();
 
     printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
     printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
@@ -122,7 +125,7 @@ bool Game::initGame()
     medKitPos = vec3(0.0f, 2.5186f, 0.0f);
     medKitTranslate.translate(medKitPos);
 
-    line.create();
+    line->create();
 
 
     // light info
@@ -168,13 +171,7 @@ void Game::render() {
 
 
 
-    renderer->setUniform1i("colorLine", 0);
-    if (lineUpdate)
-    {
-	renderer->setUniform1i("colorLine", 1);
-	line.draw(roLine, rdLine, lineDistance);
-    }
-    renderer->setUniform1i("colorLine", 0);
+
 
     
 
@@ -214,6 +211,10 @@ void Game::render() {
     aabb->draw();
 
 
+    //line->setUniform(&camera->mViewProj, &gunMV);
+    //line->draw(dRO, dRDIR, 300.0);
+
+
     ui->begin(camera->aspect);
     ui->end();
 }
@@ -238,10 +239,38 @@ void Game::updateTick()
     vec3 ro = player->pos + vec3(0.0f, PLAYER_HEIGHT, 0.0f);
     mat4 tempView;
     tempView.identity();
-    tempView.rotateY(player->rot.y);
-    tempView.rotateX(player->rot.x);
-    tempView.rotateZ(player->rot.z);
+    tempView.rotateY(camera->rot.y);
+    tempView.rotateX(camera->rot.x);
+    tempView.rotateZ(camera->rot.z);
     vec3 rd = -vec3(tempView.e02, tempView.e12, tempView.e22);
+
+    mat4 invM;
+    invM.scale(1.0/aabb->size.x, 1.0/aabb->size.y, 1.0f/aabb->size.z);
+    //invM.translate(-aabb->center);
+    vec3 invTranslate = vec3(aabb->transform.e03, aabb->transform.e13, aabb->transform.e23);
+    invM.translate(-invTranslate);
+
+    vec3 rayPosLocal = invM * vec4(ro, 1.0);
+    vec3 rayDirLocal = invM * vec4(rd, 0.0);
+    
+    mat4 testINV = invM * aabb->transform;
+    testINV.print();
+
+
+
+//float t =aabb->intersect(rayPosLocal, rayDirLocal);
+//float t =aabb->intersect(ro, rd);
+
+    float t = 8192.0f;
+    float t0 = 8192.0f;
+    trace(ro, rd, t0);
+    if (t0 < t) {
+	printf("Hit\n");
+	t = t0;
+    }
+
+
+
 
 
 
@@ -249,7 +278,7 @@ void Game::updateTick()
     //printf("RO %f %f %f\n", ro.x, ro.y, ro.z);
     //printf("Rd %f %f %f\n", rd.x, rd.y, rd.z);
     // maybe i need to map ray to object space
-    printf("%f\n", aabb->intersect(ro, rd));
+    printf("%f\n", t);
 
 }
 
