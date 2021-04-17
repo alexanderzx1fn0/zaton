@@ -17,6 +17,7 @@
 #define PLAYER_JUMP_SPEED       8.0f
 #define GRAVITY  2.0f * 9.81f // 2.0f * 9.81f
 
+
 constexpr float PITCH_OFFSET_R    = 0.0f;   // Насколько сильно ствол смещается вбок (влево) при вертикальных поворотах камеры
 constexpr float PITCH_OFFSET_N    = 0.0f;   // Насколько сильно ствол поднимается\опускается при вертикальных поворотах камеры
 constexpr float PITCH_OFFSET_D    = 0.02f;  // Насколько сильно ствол приближается\отдаляется при вертикальных поворотах камеры
@@ -51,6 +52,7 @@ public:
 
     int  health;
 
+    static int swingCounter;    // Used for 1st person swinging movement
     vec3 pos;
     vec3 rot;
     vec3 velocity;
