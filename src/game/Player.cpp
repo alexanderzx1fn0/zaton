@@ -15,6 +15,8 @@ extern vec3 rdLine;
 extern bool lineUpdate;
 extern float lineDistance;
 
+int Player::swingCounter = 0;
+
 
 
 bool intersect(const vec3& ro, const vec3& rd, const Sphere& s, float& t)
@@ -119,10 +121,33 @@ void Player::update() {
 
         float fmove = 0.0f, smove = 0.0f;
 
-        if (input & LEFT) smove = -1.0f;
-        if (input & RIGHT) smove = +1.0f;
-        if (input & UP)    fmove = -1.0f;
-        if (input & DOWN)  fmove = +1.0f;
+	bool isMoving = false;
+
+        if (input & LEFT)
+	{
+	    smove = -1.0f;
+	    isMoving = true;
+	}
+        if (input & RIGHT)
+	{
+	    smove = +1.0f;
+	    isMoving = true;
+	}
+        if (input & UP) 
+	{
+	    fmove = -1.0f;
+	    isMoving = true;
+	}
+        if (input & DOWN)
+	{
+	    fmove = +1.0f;
+	    isMoving = true;
+	}
+
+	if (isMoving)
+	{
+	    Player::swingCounter++;
+	}
 
         vec3 dir   = vec3(m.e20, m.e21, m.e22);
         vec3 right = vec3(m.e00, m.e01, m.e02);
@@ -140,6 +165,10 @@ void Player::update() {
         }
 
         pos = pos + velocity * deltaTime;
+
+
+
+
 
         onGround = false;
 

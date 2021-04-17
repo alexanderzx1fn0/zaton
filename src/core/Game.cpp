@@ -227,6 +227,7 @@ void Game::updateTick()
     {
 	camera->setPos(player->getHeadPos());
 	camera->setRot(player->getRot());
+
     }
     camera->update();
     renderer->currentShader->bind();
