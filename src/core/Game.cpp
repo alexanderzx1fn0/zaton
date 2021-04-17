@@ -169,13 +169,6 @@ void Game::render() {
         renderer->batch[i]->draw_mesh();
     }
 
-
-
-
-
-    
-
-
     invModelview.identity();
     invModelview.translate(player->pos + vec3(0.0, PLAYER_HEIGHT, 0.0));
     invModelview.rotateY(player->rot.y);
@@ -221,6 +214,7 @@ void Game::render() {
 
 void Game::updateTick()
 {
+
 
     player->update();
     if (!camera->freeCam)
