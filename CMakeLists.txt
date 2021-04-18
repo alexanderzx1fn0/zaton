@@ -50,7 +50,8 @@ ${PLATFORM_SOURCES}
 "src/input/Keyboard.h"
 "src/input/Mouse.h"
 
-
+"src/game/Actor.h"
+"src/game/Actor.cpp"
 "src/game/Camera.h"
 "src/game/Camera.cpp"
 "src/game/BasePlayer.h"
