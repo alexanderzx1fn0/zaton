@@ -1,15 +1,12 @@
 #ifndef SPIDER_H_
 #define SPIDER_H_
 
-#include "Actor.h"
 
-class Spider : public Actor
+class Spider
 {
 public:
-    Spider(class Game* game);
+    Spider();
     ~Spider();
-
-    class MeshComponent* mMeshComponent;
 };
 
 #endif
