@@ -15,6 +15,8 @@ public:
     Sphere s;
     vec3 pos;
     vec3 rot;
+
+    mat4 mWorldTransform;
 };
 
 
