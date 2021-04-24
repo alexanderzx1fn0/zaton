@@ -3,6 +3,8 @@
 
 #include "graphics/opengl/OpenGLExtensions.h"
 
+#include <vector>
+
 
 class Game
 {
@@ -17,6 +19,13 @@ public:
 
     void updateTick();
     void update();
+
+    void AddActor(class Actor* actor);
+    void RemoveActor(class Actor* actor);
+
+    void LoadData();
+    void UnloadData();
+
 
     class Cube *cube;
     class OpenGLRenderer* renderer;
@@ -36,6 +45,8 @@ public:
     class UI *ui;
 
     int mWidth, mHeight;
+
+    std::vector<class Actor*> mActors;
 };
 
 

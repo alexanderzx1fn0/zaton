@@ -47,7 +47,6 @@ struct Model
     simpleVertex* f_vertices;
     texturedVertex* t_vertices;
     int textured;
-
 };
 
 #endif

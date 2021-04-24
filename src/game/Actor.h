@@ -9,12 +9,10 @@ public:
     Actor(class Game* game);
     virtual ~Actor();
 
-    // Add/remove components
     void AddComponent(class Component* component);
     void RemoveComponent(class Component* component);
 
 private:
-
     std::vector<class Component*> mComponents;
     class Game* mGame;
 };

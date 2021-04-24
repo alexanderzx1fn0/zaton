@@ -52,6 +52,12 @@ ${PLATFORM_SOURCES}
 
 "src/game/Actor.h"
 "src/game/Actor.cpp"
+"src/game/Component.h"
+"src/game/Component.cpp"
+"src/game/Spider.h"
+"src/game/Spider.cpp"
+"src/game/MeshComponent.h"
+"src/game/MeshComponent.cpp"
 "src/game/Camera.h"
 "src/game/Camera.cpp"
 "src/game/BasePlayer.h"

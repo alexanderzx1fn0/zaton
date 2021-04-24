@@ -20,6 +20,9 @@
 #include "game/Camera.h"
 #include "game/Player.h"
 #include "game/Entity.h"
+#include "game/Actor.h"
+#include "game/Spider.h"
+
 
 #include "physics/Collision.h"
 
@@ -49,6 +52,7 @@ Game::Game(int width, int height) : mWidth(width), mHeight(height)
 
 Game::~Game()
 {
+    UnloadData();
     ClearLevel();
     delete aabb;
     delete line;
@@ -71,6 +75,7 @@ bool Game::initGame()
     LoadLevel("../data/mesh.geom");
     LoadCollidableGeometry("../data/env.lvl");
 
+    LoadData();
 
     line = new Line;
     // create aabb for each entities
@@ -284,5 +289,41 @@ void Game::update()
 	deltaTime = min(d, 1.0f / 60.0f);
 	updateTick();
 	d -= deltaTime;
+    }
+}
+
+void Game::AddActor(Actor* actor)
+{
+    mActors.push_back(actor);
+}
+
+void Game::RemoveActor(Actor* actor)
+{
+    // Is it in actors?
+    auto iter = std::find(mActors.begin(), mActors.end(), actor);
+    if (iter != mActors.end())
+    {
+            // Swap to end of vector and pop off (avoid erase copies)
+            std::iter_swap(iter, mActors.end() - 1);
+            mActors.pop_back();
+    }
+}
+
+void Game::LoadData()
+{
+    for (int i = 0; i < 20; i++)
+    {
+        new Spider(this);
+    }
+
+}
+void Game::UnloadData()
+{
+    // while list of actors not empty
+    while(!mActors.empty())
+    {
+        // when we start delete it then each instance of actor class will call destructor
+        // which call mGame->RemoveActor(this)
+        delete mActors.back();
     }
 }
