@@ -2,7 +2,7 @@
 #define PLATFORM_H_
 
 #if defined(_WIN32)
-
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
 #define KEY_SPACE VK_SPACE

@@ -3,3 +3,5 @@ linuxBuild/
 *.swp
 *.txt
 !CMakeLists.txt
+.idea/
+cmake-build-debug/

@@ -88,7 +88,7 @@ add_executable(${PROJECT_NAME} ${SOURCES_FILES_MAIN})
 if (MSVC)
     target_link_libraries(zaton ${OPENGL_LIBRARIES} shell32 user32 gdi32 -NODEFAULTLIB:LIBCMT)
 else()
-    target_link_libraries(zaton ${OPENGL_LIBRARIES} -lX11 -lm)
+    target_link_libraries(zaton ${OPENGL_LIBRARIES} -lm)
     set (CMAKE_CXX_FLAGS "-g")
 endif()
     
