@@ -37,7 +37,7 @@ void Line::create()
 
 void Line::draw(const vec3& ro, const vec3& rd, float t)
 {
-    printf("Draw line\n");
+    //printf("Draw line\n");
 /*
     vertices[0] = ro.x;
     vertices[1] = ro.y;

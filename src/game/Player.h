@@ -18,14 +18,14 @@
 #define GRAVITY  2.0f * 9.81f // 2.0f * 9.81f
 
 
-constexpr float PITCH_OFFSET_R    = 0.0f;   // Насколько сильно ствол смещается вбок (влево) при вертикальных поворотах камеры
-constexpr float PITCH_OFFSET_N    = 0.0f;   // Насколько сильно ствол поднимается\опускается при вертикальных поворотах камеры
-constexpr float PITCH_OFFSET_D    = 0.02f;  // Насколько сильно ствол приближается\отдаляется при вертикальных поворотах камеры
-constexpr float PITCH_LOW_LIMIT   = -PI;    // Минимальное значение pitch при использовании совместно с PITCH_OFFSET_N
-constexpr float ORIGIN_OFFSET     = -0.05f; // Фактор влияния инерции на положение ствола (чем меньше, тем масштабней инерция)
-constexpr float ORIGIN_OFFSET_AIM = -0.03f; // (Для прицеливания)
-constexpr float TENDTO_SPEED      = 5.f;    // Скорость нормализации положения ствола
-constexpr float TENDTO_SPEED_AIM  = 8.f;    // (Для прицеливания)
+const float PITCH_OFFSET_R    = 0.0f;   // Насколько сильно ствол смещается вбок (влево) при вертикальных поворотах камеры
+const float PITCH_OFFSET_N    = 0.0f;   // Насколько сильно ствол поднимается\опускается при вертикальных поворотах камеры
+const float PITCH_OFFSET_D    = 0.02f;  // Насколько сильно ствол приближается\отдаляется при вертикальных поворотах камеры
+const float PITCH_LOW_LIMIT   = -PI;    // Минимальное значение pitch при использовании совместно с PITCH_OFFSET_N
+const float ORIGIN_OFFSET     = -0.05f; // Фактор влияния инерции на положение ствола (чем меньше, тем масштабней инерция)
+const float ORIGIN_OFFSET_AIM = -0.03f; // (Для прицеливания)
+const float TENDTO_SPEED      = 5.f;    // Скорость нормализации положения ствола
+const float TENDTO_SPEED_AIM  = 8.f;    // (Для прицеливания)
 
 
 

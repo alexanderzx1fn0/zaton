@@ -4,7 +4,7 @@
 #include "graphics/opengl/OpenGLExtensions.h"
 
 #include <stdio.h>
-#include <stdbool.h>
+
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -31,6 +31,15 @@ private:
 
     GLuint id;
 };
+
+
+namespace shader {
+GLuint load(const char * filename, GLenum shader_type, bool check_errors);
+
+}
+
+
+
 
 
 

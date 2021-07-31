@@ -20,6 +20,8 @@ public:
     void updateTick();
     void update();
 
+    GLuint render_program;
+
     class Cube *cube;
     class OpenGLRenderer* renderer;
     class Shader* shader;
@@ -36,6 +38,7 @@ public:
     class Line* line;
 
     class UI *ui;
+	class Fountain *fountainEmitter;
 
     int mWidth, mHeight;
 };

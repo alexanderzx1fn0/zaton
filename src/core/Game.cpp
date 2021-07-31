@@ -21,6 +21,7 @@
 #include "game/Player.h"
 #include "game/Entity.h"
 #include "game/Spider.h"
+#include "game/particle/fountain.h"
 
 
 #include "physics/Collision.h"
@@ -52,6 +53,7 @@ Game::Game(int width, int height) : mWidth(width), mHeight(height)
 Game::~Game()
 {
     ClearLevel();
+	delete fountainEmitter;
     delete aabb;
     delete line;
     delete ui;
@@ -73,6 +75,9 @@ bool Game::initGame()
     LoadLevel("../data/mesh.geom");
     LoadCollidableGeometry("../data/env.lvl");
 
+	fountainEmitter = new Fountain(vec3(0.0f, 0.0f, 0.0f));
+    fountainEmitter->setWindowHeight(720.0f);
+    fountainEmitter->createBuffer();
 
     line = new Line;
     // create aabb for each entities
@@ -81,12 +86,12 @@ bool Game::initGame()
     aabb->generateBox();
     //aabb->recompute();
 
-    printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
-    printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
-    printf("Recompute\n");
+    //printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
+    //printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
+    //printf("Recompute\n");
     aabb->recompute();
-    printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
-    printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
+    //printf("MIN: %f %f %f\n", aabb->min.x, aabb->min.y, aabb->min.z);
+    //printf("MAX: %f %f %f\n", aabb->max.x, aabb->max.y, aabb->max.z);
 
     
     printf("Load done\n");
@@ -206,6 +211,8 @@ void Game::render() {
     aabb->draw();
 
 
+   
+
     //line->setUniform(&camera->mViewProj, &gunMV);
     //line->draw(dRO, dRDIR, 300.0);
 
@@ -221,8 +228,8 @@ void Game::updateTick()
     player->update();
     if (!camera->freeCam)
     {
-	camera->setPos(player->getHeadPos());
-	camera->setRot(player->getRot());
+	    camera->setPos(player->getHeadPos());
+	    camera->setRot(player->getRot());
 
     }
     camera->update();
@@ -251,7 +258,7 @@ void Game::updateTick()
     vec3 rayDirLocal = invM * vec4(rd, 0.0);
     
     mat4 testINV = invM * aabb->transform;
-    testINV.print();
+    //testINV.print();
 
 
 
@@ -262,20 +269,23 @@ void Game::updateTick()
     float t0 = 8192.0f;
     trace(ro, rd, t0);
     if (t0 < t) {
-	printf("Hit\n");
-	t = t0;
+	    //printf("Hit\n");
+	    t = t0;
     }
 
 
-
-
+	glUseProgram(fountainEmitter->getProgram());
+    fountainEmitter->update(deltaTime);
+    fountainEmitter->setProj(&camera->mViewProj);
+    fountainEmitter->setView(&camera->mView);
+	fountainEmitter->render();
 
 
     //rd = rd * 30.0f;
     //printf("RO %f %f %f\n", ro.x, ro.y, ro.z);
     //printf("Rd %f %f %f\n", rd.x, rd.y, rd.z);
     // maybe i need to map ray to object space
-    printf("%f\n", t);
+    //printf("%f\n", t);
 
 }
 

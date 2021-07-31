@@ -6,7 +6,7 @@
 #include <errno.h>
 //#include <X11/Xlib.h>
 #include <time.h>
-#include <stdbool.h>
+
 #include <math.h>
 
 #include "graphics/opengl/OpenGLExtensions.h"

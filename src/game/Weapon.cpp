@@ -37,6 +37,7 @@ void Weapon::fire(const vec3& pos, const vec3& rot, bool hold)
         vec3 nextPos = bulletPos + velocity * deltaTime;
 
         if (trace(pos, nextPos, bulletPos, 10)) {
+            
             printf("Fire\n"); 
         }
 }

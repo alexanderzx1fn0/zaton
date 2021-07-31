@@ -62,6 +62,12 @@ ${PLATFORM_SOURCES}
 "src/game/Weapon.h"
 "src/game/Weapon.cpp"
 
+"src/game/particle/particle.h"
+"src/game/particle/fountainEmitter.h"
+"src/game/particle/fountainEmitter.cpp"
+"src/game/particle/fountain.h"
+"src/game/particle/fountain.cpp"
+
 "src/gui/UI.h"
 "src/gui/UI.cpp"
 
@@ -78,9 +84,13 @@ ${PLATFORM_SOURCES}
 
 "src/physics/Collision.h"
 "src/physics/Collision.cpp"
+
+"src/math/random.h"
+"src/math/constant.h"
 )
 
 include_directories("libs/")
+include_directories("libs/glm/")
 include_directories("src/")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -89,7 +99,9 @@ if (MSVC)
     target_link_libraries(zaton ${OPENGL_LIBRARIES} shell32 user32 gdi32 -NODEFAULTLIB:LIBCMT)
 else()
     target_link_libraries(zaton ${OPENGL_LIBRARIES} -lm)
-    set (CMAKE_CXX_FLAGS "-g")
+    set (CMAKE_CXX_FLAGS "-g -fpermissive")
+    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
 endif()
     
 
