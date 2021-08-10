@@ -25,7 +25,7 @@ void Camera::update()
     if (freeCam) {
 	vec3 dir   = vec3(mView.e20, mView.e21, mView.e22);
 	vec3 right = vec3(mView.e00, mView.e01, mView.e02);
-	float k = deltaTime * 4.0f;
+	float k = deltaTime * 64.0f;
 	// TODO:: in window is CAPITAL LETTERS i need to fix that
 	if (GInput->keyStates[KEY_A])
 	{
@@ -38,7 +38,7 @@ void Camera::update()
     
     mView.translate(-pos);
 
-    mProj.perspective(90.0f, aspect, 0.01f, 100.0f);
+    mProj.perspective(90.0f, aspect, 0.1f, 1000.0f);
 
     mViewDEBUG = mView;
 

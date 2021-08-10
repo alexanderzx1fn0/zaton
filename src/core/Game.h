@@ -20,7 +20,13 @@ public:
     void updateTick();
     void update();
 
+    void collideWithLevel();
+
+
     GLuint render_program;
+
+    class Terrain *mainTerrain;
+    class Terrain *adjTerrain;
 
     class Cube *cube;
     class OpenGLRenderer* renderer;
@@ -32,13 +38,13 @@ public:
     class Texture* wallTex;
     class Texture* medKitTex;
     class Texture* gunTex;
+    class Texture* tex_wall;
 
     // DEBUG THINGS
     class AABB* aabb;
     class Line* line;
 
     class UI *ui;
-	class Fountain *fountainEmitter;
 
     int mWidth, mHeight;
 };

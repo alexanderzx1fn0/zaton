@@ -29,7 +29,6 @@ extern PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 
 #elif defined(__linux__)
 #include <GL/glx.h>
-#include <GL/glu.h>
 
 #endif
 

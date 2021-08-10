@@ -164,7 +164,7 @@
 
         void FountainEmitter::render()
         {
-            glUseProgram(program);
+             glUseProgram(program);
 
             glDisable(GL_DEPTH_TEST);
             glEnable(GL_BLEND);
@@ -176,32 +176,34 @@
             glBindTexture(GL_TEXTURE_2D, ptTexture->id);
             glBindVertexArray(vao);
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            glBufferData(GL_ARRAY_BUFFER, MAX_PARTICLES * sizeof(RealParticleFountain), nullptr, GL_STREAM_DRAW);
+            
 
 			if (mAliveParticles.size() > 0) {
 				int numActiveParticles = 0;
 				float* pData = (float*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-				for (int i = 0; i < mAliveParticles.size(); i++)
-				{
-					*(pData++)=mAliveParticles[i]->mPosition.x;
-					*(pData++)=mAliveParticles[i]->mPosition.y;
-					*(pData++)=mAliveParticles[i]->mPosition.z;
-					*(pData++)=mAliveParticles[i]->mDirection.x;
-					*(pData++)=mAliveParticles[i]->mDirection.y;
-					*(pData++)=mAliveParticles[i]->mDirection.z;
-					*(pData++)=mAliveParticles[i]->mSize;
-					*(pData++)=mAliveParticles[i]->mAge;
-					*(pData++)=mAliveParticles[i]->mLifeTime;
-					*(pData++)=mAliveParticles[i]->mColor.x;
-					*(pData++)=mAliveParticles[i]->mColor.y;
-					*(pData++)=mAliveParticles[i]->mColor.z;
-					*(pData++)=mAliveParticles[i]->mColor.w;
-					numActiveParticles++;
-				}
+               // memcpy(pData, mAliveParticles.data(), mAliveParticles.size()*sizeof(RealParticleFountain));
+
+                for (auto& particle : mAliveParticles)
+                {
+                    *(pData++) = particle->mPosition.x;
+                    *(pData++) = particle->mPosition.y;
+                    *(pData++) = particle->mPosition.y;
+                    *(pData++) = particle->mDirection.x;
+                    *(pData++) = particle->mDirection.y;
+                    *(pData++) = particle->mDirection.z;
+                    *(pData++) = particle->mSize;
+                    *(pData++) = particle->mAge;
+                    *(pData++) = particle->mLifeTime;
+                    *(pData++) = particle->mColor.x;
+                    *(pData++) = particle->mColor.y;
+                    *(pData++) = particle->mColor.z;
+                    *(pData++) = particle->mColor.w;
+                }
+				
 				glUnmapBuffer(GL_ARRAY_BUFFER);
 
 
-				glDrawArrays(GL_POINTS, 0, numActiveParticles);
+				glDrawArrays(GL_POINTS, 0, mAliveParticles.size());
 				glBindVertexArray(0);
 
 				glDisable(GL_BLEND);

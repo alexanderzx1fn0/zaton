@@ -1,5 +1,6 @@
 #version 330 core
 
+uniform sampler2D Sample0;
 uniform sampler2D uDiffuse;
 uniform vec3 color;
 out vec4 fragColor;
@@ -50,7 +51,10 @@ void main()
     }
     else {
 	    //fragColor = vec4(normalize(p), 1.0);
-            fragColor = vec4(ads(0, p, n), 1.0);
+            //fragColor = vec4(ads(0, p, n), 1.0);
+            //fragColor = vec4(vec3(uv, 0.0), 1.0);
+            //fragColor = vec4(vec3(1.0f, 0.0, 0.0), 1.0);
+            fragColor = texture(Sample0, uv);
     }
     //fragColor = vec4(normalize(n), 1.0);
 }

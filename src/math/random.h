@@ -3,19 +3,19 @@
 
 namespace math {
 
-inline int RandomNumber(int min, int max)
+inline int RandomNumber(int _min, int _max)
 {
-    if (min == max) return (min);
-    return ((rand()% (abs(max-min)+1)) +min);
+    if (_min == _max) return (_min);
+    return ((rand()% (abs(_max-_min)+1)) +_min);
 }
-inline float RandomNumber(float min, float max)
+inline float RandomNumber(float _min, float _max)
 {
-    if (min == max)
+    if (_min == _max)
     {
-        return min;
+        return _min;
     }
     float random = (float)rand() / (float) RAND_MAX;
-    return ((random * (float)fabs(max-min))+min);
+    return ((random * (float)fabs(_max-_min))+_min);
 }
 
 inline float GetRandomFloat(float a, float b)

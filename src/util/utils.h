@@ -4,7 +4,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-
+/*
+#ifndef min
+#define max(a,b) (((a) (b)) ? (a) : (b))
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+*/
 #define M4D(aRow, bCol) \
 	a.v[0 * 4 + (aRow)] * b.v[(bCol) * 4 + 0] + \
 	a.v[1 * 4 + (aRow)] * b.v[(bCol) * 4 + 1] + \

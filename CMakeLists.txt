@@ -43,6 +43,8 @@ ${PLATFORM_SOURCES}
 "src/graphics/Model.h"
 "src/graphics/DrawDebug.h"
 "src/graphics/DrawDebug.cpp"
+"src/graphics/data/vbocube.h"
+"src/graphics/data/vertex.h"
 
 
 "src/input/Input.h"
@@ -61,12 +63,9 @@ ${PLATFORM_SOURCES}
 "src/game/Entity.cpp"
 "src/game/Weapon.h"
 "src/game/Weapon.cpp"
-
-"src/game/particle/particle.h"
-"src/game/particle/fountainEmitter.h"
-"src/game/particle/fountainEmitter.cpp"
-"src/game/particle/fountain.h"
-"src/game/particle/fountain.cpp"
+"src/game/objects.h"
+"src/game/Terrain.h"
+"src/game/Terrain.cpp"
 
 "src/gui/UI.h"
 "src/gui/UI.cpp"
@@ -76,6 +75,7 @@ ${PLATFORM_SOURCES}
 "src/scene/LoadLevel.cpp"
 "src/scene/Cube.h"
 "src/scene/Cube.cpp"
+"src/scene/scene.h"
 
 "src/util/utils.h"
 "src/util/utils.cpp"
@@ -98,10 +98,10 @@ add_executable(${PROJECT_NAME} ${SOURCES_FILES_MAIN})
 if (MSVC)
     target_link_libraries(zaton ${OPENGL_LIBRARIES} shell32 user32 gdi32 -NODEFAULTLIB:LIBCMT)
 else()
-    target_link_libraries(zaton ${OPENGL_LIBRARIES} -lm)
+	target_link_libraries(zaton ${OPENGL_LIBRARIES} -lm -lGL -lX11)
     set (CMAKE_CXX_FLAGS "-g -fpermissive")
-    set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
+    #set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ -lwsock32 -lws2_32 ${CMAKE_CXX_STANDARD_LIBRARIES}")
+    #set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Bstatic,--whole-archive -lwinpthread -Wl,--no-whole-archive")
 endif()
     
 

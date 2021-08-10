@@ -1,7 +1,9 @@
 #include "Collision.h"
 #include "game/Entity.h"
+#if 0
 static float fminf(float a, float b) { return (a < b ? a : b); }
 static float fmaxf(float a, float b) { return (a > b ? a : b); }
+#endif
 
 AABB::AABB()
     : transform()
