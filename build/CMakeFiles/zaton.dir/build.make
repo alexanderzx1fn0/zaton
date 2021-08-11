@@ -291,9 +291,22 @@ CMakeFiles/zaton.dir/src/game/Terrain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/zaton.dir/src/game/Terrain.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/dev/zaton/src/game/Terrain.cpp -o CMakeFiles/zaton.dir/src/game/Terrain.cpp.s
 
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: CMakeFiles/zaton.dir/flags.make
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../src/game/sky/SkyPlane.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o -c /home/user/dev/zaton/src/game/sky/SkyPlane.cpp
+
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/user/dev/zaton/src/game/sky/SkyPlane.cpp > CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.i
+
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/user/dev/zaton/src/game/sky/SkyPlane.cpp -o CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.s
+
 CMakeFiles/zaton.dir/src/gui/UI.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/gui/UI.cpp.o: ../src/gui/UI.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/zaton.dir/src/gui/UI.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/zaton.dir/src/gui/UI.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/gui/UI.cpp.o -c /home/user/dev/zaton/src/gui/UI.cpp
 
 CMakeFiles/zaton.dir/src/gui/UI.cpp.i: cmake_force
@@ -306,7 +319,7 @@ CMakeFiles/zaton.dir/src/gui/UI.cpp.s: cmake_force
 
 CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o: ../src/scene/LoadLevel.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o -c /home/user/dev/zaton/src/scene/LoadLevel.cpp
 
 CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.i: cmake_force
@@ -319,7 +332,7 @@ CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.s: cmake_force
 
 CMakeFiles/zaton.dir/src/scene/Cube.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/scene/Cube.cpp.o: ../src/scene/Cube.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/zaton.dir/src/scene/Cube.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/zaton.dir/src/scene/Cube.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/scene/Cube.cpp.o -c /home/user/dev/zaton/src/scene/Cube.cpp
 
 CMakeFiles/zaton.dir/src/scene/Cube.cpp.i: cmake_force
@@ -332,7 +345,7 @@ CMakeFiles/zaton.dir/src/scene/Cube.cpp.s: cmake_force
 
 CMakeFiles/zaton.dir/src/util/utils.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/util/utils.cpp.o: ../src/util/utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/zaton.dir/src/util/utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/zaton.dir/src/util/utils.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/util/utils.cpp.o -c /home/user/dev/zaton/src/util/utils.cpp
 
 CMakeFiles/zaton.dir/src/util/utils.cpp.i: cmake_force
@@ -345,7 +358,7 @@ CMakeFiles/zaton.dir/src/util/utils.cpp.s: cmake_force
 
 CMakeFiles/zaton.dir/src/util/Stream.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/util/Stream.cpp.o: ../src/util/Stream.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/zaton.dir/src/util/Stream.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/zaton.dir/src/util/Stream.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/util/Stream.cpp.o -c /home/user/dev/zaton/src/util/Stream.cpp
 
 CMakeFiles/zaton.dir/src/util/Stream.cpp.i: cmake_force
@@ -358,7 +371,7 @@ CMakeFiles/zaton.dir/src/util/Stream.cpp.s: cmake_force
 
 CMakeFiles/zaton.dir/src/physics/Collision.cpp.o: CMakeFiles/zaton.dir/flags.make
 CMakeFiles/zaton.dir/src/physics/Collision.cpp.o: ../src/physics/Collision.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/zaton.dir/src/physics/Collision.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/zaton.dir/src/physics/Collision.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/zaton.dir/src/physics/Collision.cpp.o -c /home/user/dev/zaton/src/physics/Collision.cpp
 
 CMakeFiles/zaton.dir/src/physics/Collision.cpp.i: cmake_force
@@ -389,6 +402,7 @@ zaton_OBJECTS = \
 "CMakeFiles/zaton.dir/src/game/Entity.cpp.o" \
 "CMakeFiles/zaton.dir/src/game/Weapon.cpp.o" \
 "CMakeFiles/zaton.dir/src/game/Terrain.cpp.o" \
+"CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o" \
 "CMakeFiles/zaton.dir/src/gui/UI.cpp.o" \
 "CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o" \
 "CMakeFiles/zaton.dir/src/scene/Cube.cpp.o" \
@@ -417,6 +431,7 @@ zaton: CMakeFiles/zaton.dir/src/game/Player.cpp.o
 zaton: CMakeFiles/zaton.dir/src/game/Entity.cpp.o
 zaton: CMakeFiles/zaton.dir/src/game/Weapon.cpp.o
 zaton: CMakeFiles/zaton.dir/src/game/Terrain.cpp.o
+zaton: CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o
 zaton: CMakeFiles/zaton.dir/src/gui/UI.cpp.o
 zaton: CMakeFiles/zaton.dir/src/scene/LoadLevel.cpp.o
 zaton: CMakeFiles/zaton.dir/src/scene/Cube.cpp.o
@@ -427,7 +442,7 @@ zaton: CMakeFiles/zaton.dir/build.make
 zaton: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 zaton: /usr/lib/x86_64-linux-gnu/libGLX.so
 zaton: CMakeFiles/zaton.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable zaton"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/user/dev/zaton/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Linking CXX executable zaton"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/zaton.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

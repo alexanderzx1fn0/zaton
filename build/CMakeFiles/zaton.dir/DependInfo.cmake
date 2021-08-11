@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/user/dev/zaton/src/game/Spider.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/game/Spider.cpp.o"
   "/home/user/dev/zaton/src/game/Terrain.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/game/Terrain.cpp.o"
   "/home/user/dev/zaton/src/game/Weapon.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/game/Weapon.cpp.o"
+  "/home/user/dev/zaton/src/game/sky/SkyPlane.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o"
   "/home/user/dev/zaton/src/graphics/DrawDebug.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/graphics/DrawDebug.cpp.o"
   "/home/user/dev/zaton/src/graphics/Renderer.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/graphics/Renderer.cpp.o"
   "/home/user/dev/zaton/src/graphics/Shader.cpp" "/home/user/dev/zaton/build/CMakeFiles/zaton.dir/src/graphics/Shader.cpp.o"

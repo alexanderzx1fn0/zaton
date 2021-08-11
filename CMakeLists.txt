@@ -66,6 +66,8 @@ ${PLATFORM_SOURCES}
 "src/game/objects.h"
 "src/game/Terrain.h"
 "src/game/Terrain.cpp"
+"src/game/sky/SkyPlane.h"
+"src/game/sky/SkyPlane.cpp"
 
 "src/gui/UI.h"
 "src/gui/UI.cpp"

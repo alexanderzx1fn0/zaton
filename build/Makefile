@@ -366,6 +366,33 @@ src/game/Weapon.cpp.s:
 	$(MAKE) -f CMakeFiles/zaton.dir/build.make CMakeFiles/zaton.dir/src/game/Weapon.cpp.s
 .PHONY : src/game/Weapon.cpp.s
 
+src/game/sky/SkyPlane.o: src/game/sky/SkyPlane.cpp.o
+
+.PHONY : src/game/sky/SkyPlane.o
+
+# target to build an object file
+src/game/sky/SkyPlane.cpp.o:
+	$(MAKE) -f CMakeFiles/zaton.dir/build.make CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o
+.PHONY : src/game/sky/SkyPlane.cpp.o
+
+src/game/sky/SkyPlane.i: src/game/sky/SkyPlane.cpp.i
+
+.PHONY : src/game/sky/SkyPlane.i
+
+# target to preprocess a source file
+src/game/sky/SkyPlane.cpp.i:
+	$(MAKE) -f CMakeFiles/zaton.dir/build.make CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.i
+.PHONY : src/game/sky/SkyPlane.cpp.i
+
+src/game/sky/SkyPlane.s: src/game/sky/SkyPlane.cpp.s
+
+.PHONY : src/game/sky/SkyPlane.s
+
+# target to generate assembly for a file
+src/game/sky/SkyPlane.cpp.s:
+	$(MAKE) -f CMakeFiles/zaton.dir/build.make CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.s
+.PHONY : src/game/sky/SkyPlane.cpp.s
+
 src/graphics/DrawDebug.o: src/graphics/DrawDebug.cpp.o
 
 .PHONY : src/graphics/DrawDebug.o
@@ -807,6 +834,9 @@ help:
 	@echo "... src/game/Weapon.o"
 	@echo "... src/game/Weapon.i"
 	@echo "... src/game/Weapon.s"
+	@echo "... src/game/sky/SkyPlane.o"
+	@echo "... src/game/sky/SkyPlane.i"
+	@echo "... src/game/sky/SkyPlane.s"
 	@echo "... src/graphics/DrawDebug.o"
 	@echo "... src/graphics/DrawDebug.i"
 	@echo "... src/graphics/DrawDebug.s"

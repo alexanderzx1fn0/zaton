@@ -213,6 +213,7 @@ CMakeFiles/zaton.dir/src/core/Game.cpp.o
  ../src/game/Spider.h
  ../src/game/Terrain.h
  ../src/game/objects.h
+ ../src/game/sky/SkyPlane.h
  ../src/graphics/DrawDebug.h
  ../src/graphics/Model.h
  ../src/graphics/Renderer.h
@@ -459,6 +460,35 @@ CMakeFiles/zaton.dir/src/game/Weapon.cpp.o
  ../src/util/utils.h
  /home/user/dev/zaton/src/game/Weapon.cpp
  /home/user/dev/zaton/src/game/Weapon.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o
+ ../libs/GL/glcorearb.h
+ ../libs/GL/wglext.h
+ ../libs/KHR/khrplatform.h
+ ../libs/glm/glm/detail/_swizzle.hpp
+ ../libs/glm/glm/detail/_swizzle_func.hpp
+ ../libs/glm/glm/detail/compute_vector_relational.hpp
+ ../libs/glm/glm/detail/qualifier.hpp
+ ../libs/glm/glm/detail/setup.hpp
+ ../libs/glm/glm/detail/type_vec3.hpp
+ ../libs/glm/glm/detail/type_vec3.inl
+ ../libs/glm/glm/ext/scalar_int_sized.hpp
+ ../libs/glm/glm/ext/scalar_uint_sized.hpp
+ ../libs/glm/glm/ext/vector_bool3.hpp
+ ../libs/glm/glm/ext/vector_bool3_precision.hpp
+ ../libs/glm/glm/ext/vector_double3.hpp
+ ../libs/glm/glm/ext/vector_double3_precision.hpp
+ ../libs/glm/glm/ext/vector_float3.hpp
+ ../libs/glm/glm/ext/vector_float3_precision.hpp
+ ../libs/glm/glm/ext/vector_int3.hpp
+ ../libs/glm/glm/ext/vector_int3_sized.hpp
+ ../libs/glm/glm/ext/vector_uint3.hpp
+ ../libs/glm/glm/ext/vector_uint3_sized.hpp
+ ../libs/glm/glm/simd/neon.h
+ ../libs/glm/glm/simd/platform.h
+ ../libs/glm/glm/vec3.hpp
+ ../src/graphics/opengl/OpenGLExtensions.h
+ /home/user/dev/zaton/src/game/sky/SkyPlane.cpp
+ /home/user/dev/zaton/src/game/sky/SkyPlane.h
 CMakeFiles/zaton.dir/src/graphics/DrawDebug.cpp.o
  ../libs/GL/glcorearb.h
  ../libs/GL/wglext.h

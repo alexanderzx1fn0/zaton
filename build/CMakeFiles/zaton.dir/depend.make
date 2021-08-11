@@ -212,6 +212,7 @@ CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/game/Player.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/game/Spider.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/game/Terrain.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/game/objects.h
+CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/game/sky/SkyPlane.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/graphics/DrawDebug.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/graphics/Model.h
 CMakeFiles/zaton.dir/src/core/Game.cpp.o: ../src/graphics/Renderer.h
@@ -458,6 +459,35 @@ CMakeFiles/zaton.dir/src/game/Terrain.cpp.o: ../src/game/Terrain.h
 CMakeFiles/zaton.dir/src/game/Weapon.cpp.o: ../src/util/utils.h
 CMakeFiles/zaton.dir/src/game/Weapon.cpp.o: ../src/game/Weapon.cpp
 CMakeFiles/zaton.dir/src/game/Weapon.cpp.o: ../src/game/Weapon.h
+
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/GL/glcorearb.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/GL/wglext.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/KHR/khrplatform.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/_swizzle.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/_swizzle_func.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/compute_vector_relational.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/qualifier.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/setup.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/type_vec3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/detail/type_vec3.inl
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/scalar_int_sized.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/scalar_uint_sized.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_bool3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_bool3_precision.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_double3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_double3_precision.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_float3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_float3_precision.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_int3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_int3_sized.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_uint3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/ext/vector_uint3_sized.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/simd/neon.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/simd/platform.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../libs/glm/glm/vec3.hpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../src/graphics/opengl/OpenGLExtensions.h
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../src/game/sky/SkyPlane.cpp
+CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o: ../src/game/sky/SkyPlane.h
 
 CMakeFiles/zaton.dir/src/graphics/DrawDebug.cpp.o: ../libs/GL/glcorearb.h
 CMakeFiles/zaton.dir/src/graphics/DrawDebug.cpp.o: ../libs/GL/wglext.h

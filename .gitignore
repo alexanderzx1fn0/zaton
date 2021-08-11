@@ -6,3 +6,4 @@ linuxBuild/
 .idea/
 cmake-build-debug/
 zaton/
+build/

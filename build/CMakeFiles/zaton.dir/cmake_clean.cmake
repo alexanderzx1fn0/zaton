@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/zaton.dir/src/game/Spider.cpp.o"
   "CMakeFiles/zaton.dir/src/game/Terrain.cpp.o"
   "CMakeFiles/zaton.dir/src/game/Weapon.cpp.o"
+  "CMakeFiles/zaton.dir/src/game/sky/SkyPlane.cpp.o"
   "CMakeFiles/zaton.dir/src/graphics/DrawDebug.cpp.o"
   "CMakeFiles/zaton.dir/src/graphics/Renderer.cpp.o"
   "CMakeFiles/zaton.dir/src/graphics/Shader.cpp.o"

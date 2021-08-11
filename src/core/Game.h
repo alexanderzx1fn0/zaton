@@ -25,6 +25,7 @@ public:
 
     GLuint render_program;
 
+    class SkyPlane* skyPlane;
     class Terrain *mainTerrain;
     class Terrain *adjTerrain;
 

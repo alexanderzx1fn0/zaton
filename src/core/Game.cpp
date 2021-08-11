@@ -22,6 +22,8 @@
 #include "game/Player.h"
 #include "game/Entity.h"
 #include "game/Spider.h"
+#include "src/game/Terrain.h"
+#include "src/game/sky/SkyPlane.h"
 
 
 #include "physics/Collision.h"
@@ -33,7 +35,7 @@
 #include "src/game/objects.h"
 #include "src/scene/scene.h"
 
-#include "src/game/Terrain.h"
+
 
 vec3 medKitPos;
 mat4 medKitTranslate;
@@ -59,6 +61,7 @@ Game::~Game()
     CleanObjects();
     ClearLevel();
 
+    delete skyPlane;
     delete mainTerrain;
     delete adjTerrain;
     delete tex_wall;
@@ -80,11 +83,17 @@ Game::~Game()
 bool Game::initGame()
 {
 
+    skyPlane = new SkyPlane;
+    if (!skyPlane->create())
+    {
+        return false;
+    }
+
     tex_wall = new Texture("../data/textures/stones.png");
     mainTerrain = new Terrain("../data/terrains/mainTerrain.raw",256,256,4,0.3f,1.0f,1.0f,false);
     mainTerrain->loadTexture("../data/textures/mount.png");
     adjTerrain = new Terrain("../data/terrains/adjTerrain.raw",256,256,4,0.1f,0.5f,0.5f,false);
-    adjTerrain->loadTexture("../data/textures/grass.png");
+    adjTerrain->loadTexture("../data/textures/grass_texture.png");
     TheTerrain = mainTerrain;
     adjTerrainPointer = adjTerrain;
 
@@ -172,7 +181,8 @@ bool Game::initGame()
 
 void Game::render() {
 
-    glClearColor(0.529, 0.808, 0.922, 0.0);
+    //glClearColor(0.529, 0.808, 0.922, 0.0);
+     glClearColor(0.18867780436772762f, 0.4978442963618773f, 0.6616065586417131f, 0.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     //glEnable(GL_CULL_FACE);
@@ -194,13 +204,15 @@ void Game::render() {
     renderer->currentShader->bind();
 
         glm::mat4 I(1.0f);
+
+#if 1
         glUniformMatrix4fv(glGetUniformLocation(renderer->currentShader->getID(), "uModelM"), 1, GL_FALSE, (GLfloat*)&I[0]);
         mainTerrain->texture->bind(0);
         mainTerrain->draw(&m);
         glUniformMatrix4fv(glGetUniformLocation(renderer->currentShader->getID(), "uModelM"), 1, GL_FALSE, (GLfloat*)&I[0]);
         adjTerrain->texture->bind(0);
         adjTerrain->draw(&m);
-
+#endif
         for(int i = 0; i < objCount; i++) {
             if (objects[i].show)
             {

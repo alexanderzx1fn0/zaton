@@ -1468,6 +1468,12 @@ glm/matrix.hpp
 src/graphics/data/vbocube.h
 ../src/game/src/graphics/data/vbocube.h
 
+../src/game/sky/SkyPlane.h
+vector
+-
+glm/vec3.hpp
+-
+
 ../src/graphics/DrawDebug.h
 util/utils.h
 ../src/graphics/util/utils.h
@@ -1647,6 +1653,10 @@ game/Entity.h
 /home/user/dev/zaton/src/core/game/Entity.h
 game/Spider.h
 /home/user/dev/zaton/src/core/game/Spider.h
+src/game/Terrain.h
+/home/user/dev/zaton/src/core/src/game/Terrain.h
+src/game/sky/SkyPlane.h
+/home/user/dev/zaton/src/core/src/game/sky/SkyPlane.h
 physics/Collision.h
 /home/user/dev/zaton/src/core/physics/Collision.h
 gui/UI.h
@@ -1657,8 +1667,6 @@ src/game/objects.h
 /home/user/dev/zaton/src/core/src/game/objects.h
 src/scene/scene.h
 /home/user/dev/zaton/src/core/src/scene/scene.h
-src/game/Terrain.h
-/home/user/dev/zaton/src/core/src/game/Terrain.h
 
 /home/user/dev/zaton/src/core/Game.h
 graphics/opengl/OpenGLExtensions.h
