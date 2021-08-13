@@ -1021,5 +1021,24 @@ void CreateStandartObjects()
 */
 }
 
+/*
+class Scene
+{
+public:
+    Scene();
+    ~Scene();
+    bool LoadScene(); 
+    void Render();
+
+    Material*    mMaterialList;
+    Shaders*     mShaderList;
+    Textures*    mTextureList;
+    Light*       mLightList; 
+    unsigned int mMaterialCount;
+    unsigned int mTextureCount;
+    unsigned int mLightCount;
+    unsigned int mShaderCount;
+};
+*/
 #endif
 
